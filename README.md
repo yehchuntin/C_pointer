@@ -11,6 +11,21 @@
   - [傳值呼叫 (Call by Value)](#傳值呼叫-call-by-value)
 - [2. Pointers and Arrays](#2-pointers-and-arrays)
 - [3. Array as function argument](#3-array-as-functions-argument)
+- [4. Character arrays and pointers - part 1](#4-character-arrays-and-pointers-part1)
+- [5. Character arrays and pointers - part 2](#5-character-arrays-and-pointers-part2)
+- [6. Pointers and 2-D arrays](#6-Pointers-and-2-D-arrays)
+- [7. Pointers and multidimensional arrays](#7-Pointers-and-multidimensional-arrays)
+- [8. Pointers and dynamic memory - stack vs heap](#8-Pointers-and-dynamic-memory-stack-vs-heap)
+- [9. Dynamic memory allocation in C - malloc calloc realloc free](#9-Dynamic-memory-allocation-in-C-malloc-calloc-realloc-free)
+- [10. Pointers as Function Returns in C/C++](#10-pointers-as-function-returns-in-cc)
+- [11. Function Pointers in C / C++](#11-function-pointers-in-c--c)
+- [12. Function Pointers and Callbacks](#12-function-pointers-and-callbacks)
+- [13. Memory Leak in C/C++](#13-memory-leak-in-cc)
+
+
+
+
+
 
 
 ---
@@ -121,3 +136,24 @@ pow(x, 2) 回傳 double，但在這裡會被自動轉型成 int 存回陣列。
 &A[0] 取得陣列第一個元素的位址，用來傳遞給指標參數。
 
 sizeof(A) / sizeof(A[0]) 用於計算陣列長度，避免寫死長度。
+
+
+## 4. Character Arrays and Pointers Part1
+
+## 5. Character Arrays and Pointers Part2
+
+## 6. Pointers and 2-D Arrays
+
+## 7. Pointers and Multidimensional Arrays
+
+## 8. Pointers and Dynamic Memory-Stack vs Heap
+
+## 9. Dynamic Memory Allocation in C-malloc calloc realloc free
+
+## 10. Pointers as Function Returns in C/C++
+
+## 11. Function Pointers in C / C++
+
+## 12. Function Pointers and Callbacks
+
+## 13. Memory Leak in C/C++
