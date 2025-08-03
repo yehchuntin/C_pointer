@@ -9,7 +9,7 @@
   - [記憶體區塊](#記憶體區塊)
   - [傳址呼叫 (Call by Address)](#傳址呼叫-call-by-address)
   - [傳值呼叫 (Call by Value)](#傳值呼叫-call-by-value)
-- [Pointer and Arrays](#pointer-and-arrays)
+- [Pointers and Arrays](#pointers-and-arrays)
 
 ---
 
@@ -51,6 +51,23 @@
 
 ---
 
-## Pointer and Arrays
-[查看程式碼 ➜](pointer-and-array.c)
+## Pointers and Arrays
+[查看程式碼 ➜](pointer-and-a<img src="images/pointers-and-arrays.png" width="500">
+陣列記憶體配置
+int → 4 bytes
+int A[5] → 5 × 4 bytes = 20 bytes
+A 代表陣列的基底位址（base address）rray.c)
 
+透過指標存取
+int A[5];
+int *P;
+P = A; // P 指向陣列 A 的基底位址
+
+printf("%d\n", A);   // 印出 A (位址，例如 200)
+printf("%d\n", *A);  // 印出 *A (A[0] 的值，例如 2)
+printf("%d\n", A+1); // A+1 → 下一個元素的位址 (例如 204)
+printf("%d\n", *(A+1)); // *(A+1) → A[1] 的值 (例如 4)
+
+### 元素存取方式
+> **位址 (Address)** → `&A[i]` 或 `(A + i)`  
+> **值 (Value)** → `A[i]` 或 `*(A + i)`
