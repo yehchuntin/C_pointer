@@ -48,11 +48,11 @@
 <img src="images/call-by-value.png" width="350">
 
 [查看程式碼 ➜](callByValue.c)
-
 ---
 
 ## Pointers and Arrays
 <img src="images/pointers-and-arrays.png" width="500">  
+
 [查看程式碼 ➜](pointer-and-array.c)
 
 ---
