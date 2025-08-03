@@ -5,15 +5,15 @@
 ---
 
 ## 目錄
-- [Call by Reference](#call-by-reference)
+- [A. Call by Reference](#call-by-reference)
   - [記憶體區塊](#記憶體區塊)
   - [傳址呼叫 (Call by Address)](#傳址呼叫-call-by-address)
   - [傳值呼叫 (Call by Value)](#傳值呼叫-call-by-value)
-- [Pointers and Arrays](#pointers-and-arrays)
+- [B. Pointers and Arrays](#pointers-and-arrays)
 
 ---
 
-## Call by Reference
+## A. Call by Reference
 <img src="images/application-memory.png" width="350">
 
 ### 記憶體區塊
@@ -51,7 +51,7 @@
 
 ---
 
-## Pointers and Arrays
+## B. Pointers and Arrays
 <img src="images/pointers-and-arrays.png" width="500">  
 
 [查看程式碼 ➜](pointer-and-array.c)
