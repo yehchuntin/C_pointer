@@ -42,21 +42,21 @@
 ### 傳址呼叫 (Call by Address)
 <img src="images/call-by-address.png" width="350">
 
-[查看程式碼 ➜](callByAddress.c)
+[查看程式碼 ➜](1.callByReference/callByAddress.c)
 
 ---
 
 ### 傳值呼叫 (Call by Value)
 <img src="images/call-by-value.png" width="350">
 
-[查看程式碼 ➜](callByValue.c)
+[查看程式碼 ➜](1.callByReference/callByValue.c)
 
 ---
 
 ## 2. Pointers and Arrays
 <img src="images/pointers-and-arrays.png" width="500">
 
-[查看程式碼 ➜](pointer-and-array.c)
+[查看程式碼 ➜](2.pointerAndArray/pointer-and-array.c)
 
 ---
 
@@ -83,7 +83,7 @@ printf("%d\n", *(A+1));  // *(A+1) → A[1] 的值 (例如 4)
 ## 3. Array as Functions Argument
 
 ❌ 錯誤寫法
-[查看程式碼 ➜](wrong-array-in-functions.c)
+[查看程式碼 ➜](3.arrayAsFunctionArgument/wrong-array-in-functions.c)
 
 ```c
 #include<stdio.h>
@@ -135,7 +135,7 @@ sizeof(A) 在 sum() 裡回傳的是指標大小（64 位元系統為 8 bytes）�
 ---
 
 ✅ 正確版本：陣列傳遞到函式（指標方式）
-[查看程式碼 ➜](correct-array-in-functions.c)
+[查看程式碼 ➜](3.arrayAsFunctionArgument/correct-array-in-functions.c)
 
 ```c
 #include<stdio.h>
