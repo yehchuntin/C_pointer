@@ -82,48 +82,9 @@ printf("%d\n", *(A+1));  // *(A+1) → A[1] 的值 (例如 4)
 
 ## 3. Array as Functions Argument
 
-❌ 錯誤寫法
+### ❌ 錯誤寫法
 [查看程式碼 ➜](3.arrayAsFunctionArgument/wrong-array-in-functions.c)
 
-```c
-#include<stdio.h>
-
-// 函式：計算陣列元素總和
-int sum(int A[]) {
-    int sum = 0;
-    
-    // ⚠️ sizeof(A) 這裡的 A 是「指標」，不是完整陣列
-    // 因此 sizeof(A) 會回傳指標大小（在 64 位元系統通常是 8 bytes）
-    // 而不是陣列的總大小
-    int size = sizeof(A) / sizeof(A[0]); 
-    
-    // 印出在函式內的 A 大小
-    printf("In the function, size of A: %d bytes. Size of A[0]: %d bytes\n", sizeof(A), sizeof(A[0]));
-
-    // 用迴圈累加陣列元素
-    for (int i = 0; i < size; i++) {
-        sum += A[i];
-    }
-
-    return sum; // 回傳總和
-}
-
-int main() {
-    // 宣告並初始化陣列 A
-    int A[] = {1, 2, 3, 4, 5};
-
-    // 在 main 中計算陣列大小
-    // sizeof(A) → 整個陣列的大小（5 × 4 bytes = 20 bytes）
-    // sizeof(A[0]) → 陣列單一元素大小（int = 4 bytes）
-    printf("In the main, size of A: %d bytes. Size of A[0]: %d bytes\n", sizeof(A), sizeof(A[0]));
-
-    // 呼叫 sum 函式計算總和並輸出結果
-    printf("Total of A is %d\n", sum(A));
-
-    return 0;
-}
-
-```
 ⚠️ 錯誤原因：
 
 當陣列作為參數傳入函式時，會退化 (decay) 成指標。
@@ -134,42 +95,8 @@ sizeof(A) 在 sum() 裡回傳的是指標大小（64 位元系統為 8 bytes）�
 
 ---
 
-✅ 正確版本：陣列傳遞到函式（指標方式）
+### ✅ 正確版本：陣列傳遞到函式（指標方式）
 [查看程式碼 ➜](3.arrayAsFunctionArgument/correct-array-in-functions.c)
-
-```c
-#include<stdio.h>
-
-int sum(int* A, int size) { // int *A 同等於 int A[]
-    int sum = 0;
-    // 這裡的 A 是指標，因此 sizeof(A) 會回傳指標大小（64 位元系統通常為 8 bytes）
-    printf("In the function, size of A: %d bytes. Size of A[0]: %d bytes\n",
-           sizeof(A), sizeof(A[0]));
-
-    for (int i = 0; i < size; i++) {
-        sum += *(A + i); // *(A + i) 等同於 A[i]
-    }
-
-    return sum;
-}
-
-int main() {
-    int A[] = {1, 2, 3, 4, 5};
-
-    // 在 main() 中，A 是陣列，因此 sizeof(A) 會計算整個陣列大小（5 × 4 = 20 bytes）
-    printf("In the main, size of A: %d bytes. Size of A[0]: %d bytes\n",
-           sizeof(A), sizeof(A[0]));
-
-    // 計算陣列元素個數
-    int size = sizeof(A) / sizeof(A[0]); 
-
-    // 將陣列首位址 &A[0] 和大小 size 傳入函式
-    printf("Total of A is %d\n", sum(&A[0], size));
-
-    return 0;
-}
-
-```
 
 💡 重點筆記
 > **陣列在函式外**： sizeof(A) → 會回傳整個陣列大小（例如 5 × 4 = 20 bytes）。
@@ -180,4 +107,14 @@ int main() {
 
 > ***(A + i) 和 A[i] 兩者等效。**
 
+### Call by address
+[查看程式碼 ➜](3.arrayAsFunctionArgument/array-call-by-address.c)
 
+💡 重點筆記
+int *A 在函式參數中等同於 int A[]，陣列在傳遞時會退化為指標。
+
+pow(x, 2) 回傳 double，但在這裡會被自動轉型成 int 存回陣列。
+
+&A[0] 取得陣列第一個元素的位址，用來傳遞給指標參數。
+
+sizeof(A) / sizeof(A[0]) 用於計算陣列長度，避免寫死長度。
