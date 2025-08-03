@@ -107,7 +107,7 @@ sizeof(A) 在 sum() 裡回傳的是指標大小（64 位元系統為 8 bytes）�
 
 > ***(A + i) 和 A[i] 兩者等效。**
 
-### Call by address
+### Call Array by Address
 [查看程式碼 ➜](3.arrayAsFunctionArgument/array-call-by-address.c)
 
 💡 重點筆記:
