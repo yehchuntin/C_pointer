@@ -5,13 +5,15 @@
 ---
 
 ## 目錄
-- [1️⃣ 記憶體架構](#1️⃣-記憶體架構)
-- [2️⃣ Call by Address (傳址呼叫)](#2️⃣-call-by-address-傳址呼叫)
-- [3️⃣ Call by Value (傳值呼叫)](#3️⃣-call-by-value-傳值呼叫)
+- [Call by Reference](#call-by-reference)
+  - [記憶體架構](#記憶體架構)
+  - [傳址呼叫 (Call by Address)](#傳址呼叫-call-by-address)
+  - [傳值呼叫 (Call by Value)](#傳值呼叫-call-by-value)
+- [Pointer and Arrays](#pointer-and-arrays)
 
 ---
 
-## 1️⃣ 應用程式記憶體結構
+## Call by Reference
 <img src="images/application-memory.png" width="300">
 
 ### 記憶體區塊：
@@ -35,16 +37,17 @@
 
 ---
 
-## 2️⃣ Call by Address (傳址呼叫)
+## Call by Address (傳址呼叫)
 <img src="images/call-by-address.png" width="400">
 
 [查看程式碼 ➜](callByAddress.c)
 
 ---
 
-## 3️⃣ Call by Value (傳值呼叫)
+## Call by Value (傳值呼叫)
 <img src="images/call-by-value.png" width="400">
 
 [查看程式碼 ➜](callByValue.c)
 
 
+## Pointer and Arrays
