@@ -1,6 +1,6 @@
-# C 語言記憶體與函式呼叫筆記
+# C Pointers Notes
 
-這份筆記整理了 C 語言中應用程式的記憶體架構，以及函式呼叫時「傳址呼叫 (Call by Reference)」與「傳值呼叫 (Call by Value)」的差異，並配合記憶體堆疊圖做說明。
+這個 repository 是針對 [Pointers in C/C++ (YouTube)](https://www.youtube.com/watch?v=zuegQmMdy8M) 影片所做的學習筆記。
 
 ---
 
@@ -28,8 +28,8 @@
 
 ---
 
-## 2️⃣ Call by Reference (傳址呼叫)
-![Call by Reference](images/call-by-reference.png)
+## 2️⃣ Call by Address (傳址呼叫)
+![Call by Address](images/call-by-address.png)
 
 ## 2️⃣ Call by Value (傳值呼叫)
 ![Call by Reference](images/call-by-reference.png)
