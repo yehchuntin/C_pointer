@@ -62,16 +62,15 @@
 // int → 4 bytes
 // int A[5] → 5 × 4 bytes = 20 bytes
 // A 代表陣列的基底位址 (base address)
-
-透過指標存取
 int A[5];
 int *P;
 P = A; // P 指向陣列 A 的基底位址
 
-printf("%d\n", A);   // 印出 A (位址，例如 200)
-printf("%d\n", *A);  // 印出 *A (A[0] 的值，例如 2)
-printf("%d\n", A+1); // A+1 → 下一個元素的位址 (例如 204)
-printf("%d\n", *(A+1)); // *(A+1) → A[1] 的值 (例如 4)
+printf("%d\n", A);       // 印出 A (位址，例如 200)
+printf("%d\n", *A);      // 印出 *A (A[0] 的值，例如 2)
+printf("%d\n", A+1);     // A+1 → 下一個元素的位址 (例如 204)
+printf("%d\n", *(A+1));  // *(A+1) → A[1] 的值 (例如 4)
+
 
 ### 元素存取方式
 > **位址 (Address)** → `&A[i]` 或 `(A + i)`  
