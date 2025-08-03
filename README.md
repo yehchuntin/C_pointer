@@ -52,11 +52,14 @@
 ---
 
 ## Pointers and Arrays
-[查看程式碼 ➜](pointer-and-a<img src="images/pointers-and-arrays.png" width="500">
+Pointers and Arrays
+<img src="images/pointers-and-arrays.png" width="500"> 
+[查看程式碼 ➜](pointer-and-array.c)
+
 陣列記憶體配置
 int → 4 bytes
 int A[5] → 5 × 4 bytes = 20 bytes
-A 代表陣列的基底位址（base address）rray.c)
+A 代表陣列的基底位址（base address）
 
 透過指標存取
 int A[5];
