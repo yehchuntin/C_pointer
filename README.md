@@ -5,7 +5,7 @@
 ---
 
 ## 1️⃣ 應用程式記憶體結構
-<img src="images/call-by-address.png" width="400">
+<img src="images/application-memory.png" width="400">
 
 ### 記憶體區塊：
 1. **Heap (堆積區)**
