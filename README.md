@@ -5,15 +5,15 @@
 ---
 
 ## 目錄
-- [A. Call by Reference](#call-by-reference)
+- [1️⃣ Call by Reference](#1️⃣-call-by-reference)
   - [記憶體區塊](#記憶體區塊)
   - [傳址呼叫 (Call by Address)](#傳址呼叫-call-by-address)
   - [傳值呼叫 (Call by Value)](#傳值呼叫-call-by-value)
-- [B. Pointers and Arrays](#pointers-and-arrays)
+- [2️⃣ Pointers and Arrays](#2️⃣-pointers-and-arrays)
 
 ---
 
-## A. Call by Reference
+## 1️⃣ Call by Reference
 <img src="images/application-memory.png" width="350">
 
 ### 記憶體區塊
@@ -51,8 +51,8 @@
 
 ---
 
-## B. Pointers and Arrays
-<img src="images/pointers-and-arrays.png" width="500">  
+## 2️⃣ Pointers and Arrays
+<img src="images/pointers-and-arrays.png" width="500">
 
 [查看程式碼 ➜](pointer-and-array.c)
 
@@ -72,7 +72,9 @@ printf("%d\n", *A);      // 印出 *A (A[0] 的值，例如 2)
 printf("%d\n", A+1);     // A+1 → 下一個元素的位址 (例如 204)
 printf("%d\n", *(A+1));  // *(A+1) → A[1] 的值 (例如 4)
 
-```
-### 元素存取方式
-> **位址 (Address)** → `&A[i]` 或 `(A + i)`  
-> **值 (Value)** → `A[i]` 或 `*(A + i)`
+[!IMPORTANT]
+元素存取方式
+
+位址 (Address) → &A[i] 或 (A + i)
+
+值 (Value) → A[i] 或 *(A + i)
