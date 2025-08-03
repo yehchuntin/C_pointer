@@ -6,7 +6,7 @@
 
 ## 目錄
 - [Call by Reference](#call-by-reference)
-  - [記憶體架構](#記憶體架構)
+  - [記憶體區塊](#記憶體區塊)
   - [傳址呼叫 (Call by Address)](#傳址呼叫-call-by-address)
   - [傳值呼叫 (Call by Value)](#傳值呼叫-call-by-value)
 - [Pointer and Arrays](#pointer-and-arrays)
@@ -14,9 +14,9 @@
 ---
 
 ## Call by Reference
-<img src="images/application-memory.png" width="300">
+<img src="images/application-memory.png" width="350">
 
-### 記憶體區塊：
+### 記憶體區塊
 1. **Heap (堆積區)**
    - 用於動態記憶體配置（例如 `malloc`、`calloc`）。
    - 由程式設計師手動分配與釋放，否則可能造成記憶體洩漏。
@@ -37,17 +37,22 @@
 
 ---
 
-## Call by Address (傳址呼叫)
-<img src="images/call-by-address.png" width="400">
+### 傳址呼叫 (Call by Address)
+<img src="images/call-by-address.png" width="350">
 
 [查看程式碼 ➜](callByAddress.c)
 
 ---
 
-## Call by Value (傳值呼叫)
-<img src="images/call-by-value.png" width="400">
+### 傳值呼叫 (Call by Value)
+<img src="images/call-by-value.png" width="350">
 
 [查看程式碼 ➜](callByValue.c)
 
+---
 
 ## Pointer and Arrays
+> 這個章節將介紹指標與陣列的關係，包含：
+> - 一維陣列
+> - 二維陣列
+> - 指標運算
