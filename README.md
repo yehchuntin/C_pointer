@@ -5,7 +5,7 @@
 ---
 
 ## 1️⃣ 應用程式記憶體結構
-![應用程式記憶體結構](images/application-memory.png)
+<img src="images/call-by-address.png" width="400">
 
 ### 記憶體區塊：
 1. **Heap (堆積區)**
@@ -29,10 +29,15 @@
 ---
 
 ## 2️⃣ Call by Address (傳址呼叫)
-![Call by Address](images/call-by-address.png)
-![](callByAdress.c)
+<img src="images/call-by-address.png" width="400">
+
+[查看程式碼 ➜](callByAddress.c)
+
+---
 
 ## 2️⃣ Call by Value (傳值呼叫)
-![Call by Value](images/call-by-value.png)
-![](callByValue.c)
+<img src="images/call-by-value.png" width="400">
+
+[查看程式碼 ➜](callByValue.c)
+
 
