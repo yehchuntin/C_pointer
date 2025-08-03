@@ -52,7 +52,6 @@
 ---
 
 ## Pointers and Arrays
-Pointers and Arrays
 <img src="images/pointers-and-arrays.png" width="500"> 
 [查看程式碼 ➜](pointer-and-array.c)
 
