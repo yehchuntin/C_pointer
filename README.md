@@ -30,9 +30,9 @@
 
 ## 2️⃣ Call by Address (傳址呼叫)
 ![Call by Address](images/call-by-address.png)
-![code](callByAdress.c)
+(callByAdress.c)
 
 ## 2️⃣ Call by Value (傳值呼叫)
 ![Call by Value](images/call-by-value.png)
-![code](callByValue.c)
+(callByValue.c)
 
