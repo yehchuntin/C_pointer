@@ -78,9 +78,13 @@ printf("%d\n", *(A+1));  // *(A+1) → A[1] 的值 (例如 4)
 > **位址 (Address)** → &A[i] 或 (A + i)  
 > **值 (Value)** → A[i] 或 *(A + i)
 
+---
+
 ## 3. Array as Functions Argument
+
 錯誤寫法
-[查看程式碼 ➜](array-in-functions.c)
+[查看程式碼 ➜](wrong-array-in-functions.c)
+
 ```c
 #include<stdio.h>
 
