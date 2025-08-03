@@ -32,6 +32,6 @@
 ![Call by Address](images/call-by-address.png)
 
 ## 2️⃣ Call by Value (傳值呼叫)
-![Call by Reference](images/call-by-reference.png)
+![Call by Value](images/call-by-value.png)
 
 
