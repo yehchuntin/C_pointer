@@ -4,6 +4,11 @@
 
 ---
 
+## 目錄
+- [1️⃣ 記憶體架構](#1️⃣-記憶體架構)
+- [2️⃣ Call by Address (傳址呼叫)](#2️⃣-call-by-address-傳址呼叫)
+- [3️⃣ Call by Value (傳值呼叫)](#3️⃣-call-by-value-傳值呼叫)
+
 ## 1️⃣ 應用程式記憶體結構
 <img src="images/application-memory.png" width="400">
 
@@ -35,7 +40,7 @@
 
 ---
 
-## 2️⃣ Call by Value (傳值呼叫)
+## 3️⃣ Call by Value (傳值呼叫)
 <img src="images/call-by-value.png" width="400">
 
 [查看程式碼 ➜](callByValue.c)
