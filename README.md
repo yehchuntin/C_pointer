@@ -72,9 +72,6 @@ printf("%d\n", *A);      // 印出 *A (A[0] 的值，例如 2)
 printf("%d\n", A+1);     // A+1 → 下一個元素的位址 (例如 204)
 printf("%d\n", *(A+1));  // *(A+1) → A[1] 的值 (例如 4)
 ```
-[!IMPORTANT]
-元素存取方式
-
-位址 (Address) → &A[i] 或 (A + i)
-
-值 (Value) → A[i] 或 *(A + i)
+### 元素存取方式
+> **位址 (Address)** → &A[i] 或 (A + i)  
+> **值 (Value)** → A[i] 或 *(A + i)
