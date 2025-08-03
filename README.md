@@ -5,15 +5,17 @@
 ---
 
 ## 目錄
-- [1️⃣ Call by Reference](#1️⃣-call-by-reference)
+- [1. Call by Reference](#1-call-by-reference)
   - [記憶體區塊](#記憶體區塊)
   - [傳址呼叫 (Call by Address)](#傳址呼叫-call-by-address)
   - [傳值呼叫 (Call by Value)](#傳值呼叫-call-by-value)
-- [2️⃣ Pointers and Arrays](#2️⃣-pointers-and-arrays)
+- [2. Pointers and Arrays](#2-pointers-and-arrays)
+- [3. Array as function argument](#3-array-as-functions-argument)
+
 
 ---
 
-## 1️⃣ Call by Reference
+## 1. Call by Reference
 <img src="images/application-memory.png" width="350">
 
 ### 記憶體區塊
@@ -51,7 +53,7 @@
 
 ---
 
-## 2️⃣ Pointers and Arrays
+## 2. Pointers and Arrays
 <img src="images/pointers-and-arrays.png" width="500">
 
 [查看程式碼 ➜](pointer-and-array.c)
@@ -75,3 +77,53 @@ printf("%d\n", *(A+1));  // *(A+1) → A[1] 的值 (例如 4)
 ### 元素存取方式
 > **位址 (Address)** → &A[i] 或 (A + i)  
 > **值 (Value)** → A[i] 或 *(A + i)
+
+## 3. Array as Functions Argument
+錯誤寫法
+[查看程式碼 ➜](array-in-functions.c)
+```c
+#include<stdio.h>
+
+// 函式：計算陣列元素總和
+int sum(int A[]) {
+    int sum = 0;
+    
+    // ⚠️ sizeof(A) 這裡的 A 是「指標」，不是完整陣列
+    // 因此 sizeof(A) 會回傳指標大小（在 64 位元系統通常是 8 bytes）
+    // 而不是陣列的總大小
+    int size = sizeof(A) / sizeof(A[0]); 
+    
+    // 印出在函式內的 A 大小
+    printf("In the function, size of A: %d bytes. Size of A[0]: %d bytes\n", sizeof(A), sizeof(A[0]));
+
+    // 用迴圈累加陣列元素
+    for (int i = 0; i < size; i++) {
+        sum += A[i];
+    }
+
+    return sum; // 回傳總和
+}
+
+int main() {
+    // 宣告並初始化陣列 A
+    int A[] = {1, 2, 3, 4, 5};
+
+    // 在 main 中計算陣列大小
+    // sizeof(A) → 整個陣列的大小（5 × 4 bytes = 20 bytes）
+    // sizeof(A[0]) → 陣列單一元素大小（int = 4 bytes）
+    printf("In the main, size of A: %d bytes. Size of A[0]: %d bytes\n", sizeof(A), sizeof(A[0]));
+
+    // 呼叫 sum 函式計算總和並輸出結果
+    printf("Total of A is %d\n", sum(A));
+
+    return 0;
+}
+
+```
+⚠️ 錯誤原因：
+
+當陣列作為參數傳入函式時，會退化 (decay) 成指標。
+
+sizeof(A) 在 sum() 裡回傳的是指標大小（64 位元系統為 8 bytes），導致 size 錯誤。
+
+實際上陣列有 5 個元素，但 size 會變成 8 / 4 = 2。
