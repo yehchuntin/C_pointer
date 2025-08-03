@@ -48,6 +48,7 @@
 <img src="images/call-by-value.png" width="350">
 
 [查看程式碼 ➜](callByValue.c)
+
 ---
 
 ## Pointers and Arrays
