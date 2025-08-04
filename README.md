@@ -55,7 +55,7 @@
 
 4. **Code (Text) 區**
    >儲存程式的機器碼指令。
-   
+
    >通常為唯讀，避免程式被意外修改。
 
 ---
@@ -164,6 +164,23 @@ strlen(C) //回傳字串實際字元數量（不含 '\0'）。
 此例：12。
 
 printf("%s\n", C); //%s 會從陣列開頭印到 '\0' 為止。
+```
+
+<img src="images/stringAndPointer.png" width="500">
+
+[查看程式碼 ➜](4.characterArraysAndPointers/stringAndPointer.c)
+
+💡 重點筆記：
+```c
+char C[6] = "Hello"; //建立一個字元陣列（含 '\0'）。
+
+sizeof(c1) //c1 是指標 → 回傳指標大小（64-bit 環境通常為 8 bytes）。
+
+c1 = C;
+// C 代表陣列的起始位址（等同 &C[0]）。
+// 不能寫 c1 = &C;，因為 &C 型態是 char (*)[6]。
+
+c1[0] = 'A'; // 修改字串第一個字元，結果變為 "Aello"。
 ```
 
 >**💡補充說明：**
