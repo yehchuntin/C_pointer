@@ -216,6 +216,7 @@ c1[0] = 'A'; // 修改字串第一個字元，結果變為 "Aello"。
 ## 5. Character Arrays and Pointers Part2
 ### 記憶體與Stack解析 
 [查看程式碼 ➜](4.characterArraysAndPointers/stringAsFunctionArgument.c)
+
 <img src="images/explanationOfMemoryAndStack.png" width="500">
 
 💡 重點筆記
