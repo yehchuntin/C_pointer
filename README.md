@@ -150,6 +150,7 @@ printf("%d\n", *(A+1));  // *(A+1) → A[1] 的值 (例如 4)
 ## 4. Character Arrays and Pointers Part1
 ### 字串基本概念
 [查看程式碼 ➜](4.characterArraysAndPointers/basicStringSkill.c)
+
 <img src="images/basicCharacterArrayUsage.png" width="500">
 
 💡 重點筆記：
@@ -171,6 +172,7 @@ printf("%s\n", C); //%s 會從陣列開頭印到 '\0' 為止。
 ---
 ### 字串與指標
 [查看程式碼 ➜](4.characterArraysAndPointers/stringAndPointer.c)
+
 <img src="images/stringAndPointer.png" width="500">
 
 💡 重點筆記：
