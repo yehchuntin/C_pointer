@@ -166,6 +166,8 @@ strlen(C) //回傳字串實際字元數量（不含 '\0'）。
 printf("%s\n", C); //%s 會從陣列開頭印到 '\0' 為止。
 ```
 
+---
+
 <img src="images/stringAndPointer.png" width="500">
 
 [查看程式碼 ➜](4.characterArraysAndPointers/stringAndPointer.c)
