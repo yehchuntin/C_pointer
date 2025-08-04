@@ -8,7 +8,8 @@ int main(){
     c1=C; //C is same as &C[0]. We cannot use &C.
     printf("%c\n",c1[1]); //"e"
     c1[0]='A';
-    printf("%s",c1);
+    printf("%s\n",c1); //Aello
+    printf("%c\n",*(c1+2)); //l -> C[2]
 
     return 0;
 }
