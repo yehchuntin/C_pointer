@@ -19,7 +19,9 @@
   - [記憶體與Stack解析 ](#記憶體與Stack解析) 
   - [唯讀記憶體 (Read-Only Data Segment)](#唯讀記憶體-read-only-data-segment)
 - [6. Pointers and 2-D arrays](#6-Pointers-and-2-D-arrays)
-  - [2D 指標陣列的使用](#2d-指標陣列的使用)
+  - [2D 指標陣列的使用](#2d-指標陣列的使用) 
+  - [2維陣列的存取等價式](#二維陣列的存取等價式)
+
 
 - [7. Pointers and multidimensional arrays](#7-Pointers-and-multidimensional-arrays)
 - [8. Pointers and dynamic memory - stack vs heap](#8-Pointers-and-dynamic-memory-stack-vs-heap)
@@ -317,6 +319,20 @@ int (*p)[3]
 
 (3) *(*B+1) //是多層解參考，最後取得B[0][1]的值。
 ```
+
+---
+### 二維陣列的存取等價式
+存取等價式
+```c
+B[i][j] = * (B[i] + j)
+        = * ( * (B + i) + j )
+```
+- B[i] 代表第 i 列，是指向 int[3] 的指標。
+
+- B[i] + j 將指標位移到第 j 個元素。
+
+- 最外層 * 解參考，取得值。
+---
 
 ## 7. Pointers and Multidimensional Arrays
 
