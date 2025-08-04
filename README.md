@@ -232,6 +232,10 @@ c1[0] = 'A'; // 修改字串第一個字元，結果變為 "Aello"。
 
 ---
 ### 唯讀記憶體 (Read-Only Data Segment)
+[詳細筆記 (HackMD)](https://hackmd.io/@SSWinCCUEE/H1NE8wpyK)
+[Wikipedia](https://en.wikipedia.org/wiki/Data_segment)
+[維基百科](https://zh.wikipedia.org/zh-tw/%E5%94%AF%E8%AE%80%E8%A8%98%E6%86%B6%E9%AB%94)
+
 1️⃣ 程式碼分析
 ```c
 //char C[20] = "Hello"; // 字串被存放在 stack 區域的陣列
@@ -243,6 +247,7 @@ C[0] = 'A';             // ❌ 這裡會導致 Segmentation Fault (嘗試修改�
 >char *C = "Hello"; //"Hello" 存放在程式的 唯讀記憶體 (read-only data segment)。
 
 >C 是指向常量字串的指標 → 嘗試 C[0] = 'A'; 會造成 執行期錯誤 (Segmentation Fault)。
+
 
 2️⃣ 主要錯誤
 你不能修改 char *C = "Hello"; 指向的內容，因為這是一個編譯期常量。
@@ -256,6 +261,7 @@ C[0] = 'A';           // 合法
 const char *C = "Hello"; // 指向常量，不能修改內容
 // C[0] = 'A'; // ❌ 編譯錯誤（防止 runtime crash）
 ```
+
 3️⃣ 💡 重點
 >陣列宣告 (char C[]) → 可修改內容 (stack 變數)
 
