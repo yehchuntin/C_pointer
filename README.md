@@ -12,6 +12,8 @@
 - [2. Pointers and Arrays](#2-pointers-and-arrays)
 - [3. Array as function argument](#3-array-as-functions-argument)
 - [4. Character arrays and pointers - part 1](#4-character-arrays-and-pointers-part1)
+  - [字串基本概念](#字串基本概念)
+  - [字串與指標](#字串與指標)
 - [5. Character arrays and pointers - part 2](#5-character-arrays-and-pointers-part2)
 - [6. Pointers and 2-D arrays](#6-Pointers-and-2-D-arrays)
 - [7. Pointers and multidimensional arrays](#7-Pointers-and-multidimensional-arrays)
@@ -143,11 +145,12 @@ printf("%d\n", *(A+1));  // *(A+1) → A[1] 的值 (例如 4)
 
 >**sizeof(A) / sizeof(A[0])** 用於計算陣列長度，避免寫死長度。
 
+---
 
 ## 4. Character Arrays and Pointers Part1
-<img src="images/basicCharacterArrayUsage.png" width="500">
-
+### 字串基本概念
 [查看程式碼 ➜](4.characterArraysAndPointers/basicStringSkill.c)
+<img src="images/basicCharacterArrayUsage.png" width="500">
 
 💡 重點筆記：
 ```c
@@ -165,12 +168,10 @@ strlen(C) //回傳字串實際字元數量（不含 '\0'）。
 
 printf("%s\n", C); //%s 會從陣列開頭印到 '\0' 為止。
 ```
-
 ---
-
-<img src="images/stringAndPointer.png" width="500">
-
+### 字串與指標
 [查看程式碼 ➜](4.characterArraysAndPointers/stringAndPointer.c)
+<img src="images/stringAndPointer.png" width="500">
 
 💡 重點筆記：
 ```c
@@ -184,12 +185,6 @@ c1 = C;
 
 c1[0] = 'A'; // 修改字串第一個字元，結果變為 "Aello"。
 ```
-
->**💡補充說明：**
-
->**sizeof** → 編譯期運算，適合用來判斷陣列大小（含 '\0'）。
-
->**strlen** → 執行期運算，專門計算字串長度（不含 '\0'）。
 
 ## 5. Character Arrays and Pointers Part2
 
