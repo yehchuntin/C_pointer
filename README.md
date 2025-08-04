@@ -18,8 +18,9 @@
 - [5. Character arrays and pointers - part 2](#5-character-arrays-and-pointers-part2)
   - [記憶體與Stack解析 ](#記憶體與Stack解析) 
   - [唯讀記憶體 (Read-Only Data Segment)](#唯讀記憶體-read-only-data-segment)
-
 - [6. Pointers and 2-D arrays](#6-Pointers-and-2-D-arrays)
+  - [2D 指標陣列的使用](#2d-指標陣列的使用)
+
 - [7. Pointers and multidimensional arrays](#7-Pointers-and-multidimensional-arrays)
 - [8. Pointers and dynamic memory - stack vs heap](#8-Pointers-and-dynamic-memory-stack-vs-heap)
 - [9. Dynamic memory allocation in C - malloc calloc realloc free](#9-Dynamic-memory-allocation-in-C-malloc-calloc-realloc-free)
@@ -295,7 +296,7 @@ int (*p)[3]
 
 (3)「其實只用到兩個元素（B[0], B[1]）」是對的，因為這個陣列只有兩列。
 ```
-### 指標與位址
+指標與位址
 | 表達式            | 說明                               | 結果 |
 |-------------------|------------------------------------|------|
 | `B`               | 等同 `&B[0]`，第一列位址           | 400  |
@@ -305,11 +306,12 @@ int (*p)[3]
 | `*(B+1)+2`        | 等同 `&B[1][2]`，第二列第 3 個元素 | 420  |
 | `*(*B+1)`         | 取值 → `B[0][1]`                  | 3    |
 
-### 重點
+重點
+```c
 - `B` 在大多數運算中會退化為「指向列的指標」。
 - `*B` 代表第一列；`B+1` 代表第二列。
 - `*(*B+1)` 是多層解參考，最後取得 `B[0][1]` 的值。
-
+```
 
 ## 7. Pointers and Multidimensional Arrays
 
