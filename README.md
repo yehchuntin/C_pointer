@@ -16,6 +16,8 @@
   - [字串與指標](#字串與指標)
   - [用字元指標將字串傳入函式](#用字元指標將字串傳入函式)
 - [5. Character arrays and pointers - part 2](#5-character-arrays-and-pointers-part2)
+  - [記憶體與Stack解析 ](#記憶體與Stack解析)
+
 - [6. Pointers and 2-D arrays](#6-Pointers-and-2-D-arrays)
 - [7. Pointers and multidimensional arrays](#7-Pointers-and-multidimensional-arrays)
 - [8. Pointers and dynamic memory - stack vs heap](#8-Pointers-and-dynamic-memory-stack-vs-heap)
@@ -212,18 +214,18 @@ c1[0] = 'A'; // 修改字串第一個字元，結果變為 "Aello"。
 ```
 
 ## 5. Character Arrays and Pointers Part2
-### 記憶體與堆疊解析
+### 記憶體與Stack解析 
+[查看程式碼 ➜](4.characterArraysAndPointers/stringAsFunctionArgument.c)
 <img src="images/explanationOfMemoryAndStack.png" width="500">
 
 💡 重點筆記
 ```c
 (1) print(C) 
 //陣列 C 自動轉換成指向 C[0] 的指標。
-//在 print()的 stack frame 中，建立一個新的指標變數C，
-//此指標指向main的陣列起始位置 100。
+//在print()的stack frame 中，建立一個新的指標變數C，此指標指向main的陣列起始位置 100。
 
 (2) 函式結束
-//print() 結束後，stack 中 print() 的區域變數（包括 C 這個指標）被釋放，但 main 裡的原本陣列 C[20] 仍存在。
+//print()結束後，stack中print()的區域變數（包括C這個指標被釋放，但main裡的原本陣列 C[20] 仍存在。
 ```
 
 ## 6. Pointers and 2-D Arrays
