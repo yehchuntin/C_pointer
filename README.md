@@ -233,7 +233,9 @@ c1[0] = 'A'; // 修改字串第一個字元，結果變為 "Aello"。
 ---
 ### 唯讀記憶體 (Read-Only Data Segment)
 [詳細筆記 (HackMD)](https://hackmd.io/@SSWinCCUEE/H1NE8wpyK)
+
 [Wikipedia](https://en.wikipedia.org/wiki/Data_segment)
+
 [維基百科](https://zh.wikipedia.org/zh-tw/%E5%94%AF%E8%AE%80%E8%A8%98%E6%86%B6%E9%AB%94)
 
 1️⃣ 程式碼分析
