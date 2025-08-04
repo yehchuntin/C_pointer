@@ -139,6 +139,35 @@ sizeof(A) / sizeof(A[0]) 用於計算陣列長度，避免寫死長度。
 
 
 ## 4. Character Arrays and Pointers Part1
+[查看程式碼 ➜](4.characterArraysAndPointers/basicStringSkill.c)
+<img src="images/basicCharacterArrayUsage.png" width="500">
+重點筆記：
+char C[] = "Mia and Ting";
+
+會自動在字串末尾加上 '\0'（字串結束符號）。
+
+"Mia and Ting" 共 12 個字元 + '\0' → 共 13 bytes。
+
+sizeof(C)
+
+回傳陣列所佔的總記憶體大小（包含 '\0'）。
+
+此例：13 bytes。
+
+strlen(C)
+
+回傳字串實際字元數量（不含 '\0'）。
+
+此例：12。
+
+printf("%s\n", C);
+
+%s 會從陣列開頭印到 '\0' 為止。
+
+補充說明：
+sizeof → 編譯期運算，適合用來判斷陣列大小（含 '\0'）。
+
+strlen → 執行期運算，專門計算字串長度（不含 '\0'）。
 
 ## 5. Character Arrays and Pointers Part2
 
