@@ -14,6 +14,7 @@
 - [4. Character arrays and pointers - part 1](#4-character-arrays-and-pointers-part1)
   - [字串基本概念](#字串基本概念)
   - [字串與指標](#字串與指標)
+  - [用字元指標將字串傳入函式](#用字元指標將字串傳入函式)
 - [5. Character arrays and pointers - part 2](#5-character-arrays-and-pointers-part2)
 - [6. Pointers and 2-D arrays](#6-Pointers-and-2-D-arrays)
 - [7. Pointers and multidimensional arrays](#7-Pointers-and-multidimensional-arrays)
@@ -189,6 +190,25 @@ c1[0] = 'A'; // 修改字串第一個字元，結果變為 "Aello"。
 
 *(c1+2) // →  C[2]
 // * → 取值 → l。
+```
+
+---
+### 用字元指標將字串傳入函式
+[查看程式碼 ➜](4.characterArraysAndPointers/stringAsFunctionArgument.c)
+
+<img src="images/stringAsFunctionArgument.png" width="500">
+
+💡 重點筆記：
+```c
+>陣列傳入函式時會自動轉換成指標：print(C) → print(char *C)。
+
+>char *C //會指向傳入陣列的第一個元素 (C[0])。
+
+>透過指標可以直接存取或修改原陣列內容（不需回傳）。
+
+>*(C+i) 等同於 C[i]，都是利用指標偏移取得字元。
+
+>while(C[i] != '\0')：用 '\0' 判斷字串結尾。
 ```
 
 ## 5. Character Arrays and Pointers Part2
