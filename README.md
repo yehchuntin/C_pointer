@@ -21,9 +21,12 @@
 - [6. Pointers and 2-D arrays](#6-Pointers-and-2-D-arrays)
   - [2D 指標陣列的使用](#2d-指標陣列的使用) 
   - [2維陣列的存取等價式](#二維陣列的存取等價式)
-
-
 - [7. Pointers and multidimensional arrays](#7-Pointers-and-multidimensional-arrays)
+  - [陣列傳入函式的型態規則](#陣列傳入函式的型態規則) 
+  - [三維陣列的存取等價式](#三維陣列的存取等價式) 
+
+
+
 - [8. Pointers and dynamic memory - stack vs heap](#8-Pointers-and-dynamic-memory-stack-vs-heap)
 - [9. Dynamic memory allocation in C - malloc calloc realloc free](#9-Dynamic-memory-allocation-in-C-malloc-calloc-realloc-free)
 - [10. Pointers as Function Returns in C/C++](#10-pointers-as-function-returns-in-cc)
@@ -380,6 +383,7 @@ printf("Value of address(%d) is %d\n", C[0][0] + 1, *(C[0][0] + 1));
 -用這個方式理解為什麼 C 要宣告成 int (*C)[2][2]：
 
   因為「指標位移」必須跨過整個 2x2 block，編譯器需要知道 block 的大小。
+  ---
 
 ### 陣列傳入函式的型態規則
 - 1D: `int A[3]` → `int *A`
@@ -409,9 +413,9 @@ C[i][j][k] = *(*(C[i]+j)+k)
 
 - *(C+i)：取出該 block
 
-- + j：移動到該 block 的第 j 列
+- +j：移動到該 block 的第 j 列
 
-- + k：移動到該列的第 k 元素
+- +k：移動到該列的第 k 元素
 
 - *：取值
 
