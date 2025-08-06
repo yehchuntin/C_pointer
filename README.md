@@ -24,20 +24,12 @@
 - [7. Pointers and multidimensional arrays](#7-Pointers-and-multidimensional-arrays)
   - [陣列傳入函式的型態規則](#陣列傳入函式的型態規則) 
   - [三維陣列的存取等價式](#三維陣列的存取等價式) 
-
-
-
 - [8. Pointers and dynamic memory - stack vs heap](#8-Pointers-and-dynamic-memory-stack-vs-heap)
 - [9. Dynamic memory allocation in C - malloc calloc realloc free](#9-Dynamic-memory-allocation-in-C-malloc-calloc-realloc-free)
 - [10. Pointers as Function Returns in C/C++](#10-pointers-as-function-returns-in-cc)
 - [11. Function Pointers in C / C++](#11-function-pointers-in-c--c)
 - [12. Function Pointers and Callbacks](#12-function-pointers-and-callbacks)
 - [13. Memory Leak in C/C++](#13-memory-leak-in-cc)
-
-
-
-
-
 
 
 ---
