@@ -28,8 +28,7 @@
   - [C 函式執行與記憶體配置](#c-函式執行與記憶體配置)
   - [Stack Overflow 是什麼？](#stack-overflow-是什麼)
   - [Heap 是什麼？該如何使用它？](#heap-是什麼-該如何使用它)
-
-
+  - [malloc 的記憶體配置動態與圖解](#malloc-的記憶體配置動態與圖解)
 - [9. Dynamic memory allocation in C - malloc calloc realloc free](#9-Dynamic-memory-allocation-in-C-malloc-calloc-realloc-free)
 - [10. Pointers as Function Returns in C/C++](#10-pointers-as-function-returns-in-cc)
 - [11. Function Pointers in C / C++](#11-function-pointers-in-c--c)
@@ -511,6 +510,70 @@ C[i][j][k] = *(*(C[i]+j)+k)
 - 忘記釋放會導致 記憶體洩漏（Memory Leak）。(後面會提到!)
 
 - Stack 是系統自動管理；Heap 是由你來管理！
+
+ ### malloc 的記憶體配置動態與圖解
+<img src="images/malloc_memoery.png" width="500">
+
+### 🧠 記憶體區域解析
+### 程式一開始的配置
+| 記憶體區域     | 描述                             |
+| --------- | ------------------------------ |
+| Stack（堆疊） | 儲存區域變數 `a` 和指標 `p`（此時 p 尚未初始化） |
+| Heap（堆積）  | 還沒有配置                          |
+
+### 第一次 malloc 執行時
+```c
+p = (int*)malloc(sizeof(int));
+```
+- `p` 取得 heap 中一塊 4 bytes 記憶體的地址（假設為 `0x200`）
+
+- `*p = 10`; 將值 10 寫入 heap 的這塊記憶體
+
+🧠 記憶體此時長這樣：
+
+- Stack:
+
+  - `a`：未知值
+
+  - `p`：儲存 `0x200`
+
+- Heap:
+
+  - 0x200：值為 10
+
+### 接下來執行 free(p);
+- heap 上 `0x200` 的空間被釋放
+
+- ❗ 注意：雖然空間釋放了，但 `p`的值（仍是 0x200）沒被自動清除！
+
+### 第二次 malloc：
+```c
+p = (int*)malloc(sizeof(int));
+*p = 20;
+```
+- 系統重新配置了一塊 heap 記憶體（這次是 0x400）
+
+- 把值 20 存進 *p
+
+🧠 記憶體現在長這樣：
+
+- Stack:
+
+  - a：未知
+
+  - p：儲存 0x400
+
+- Heap:
+
+  - 0x400：值變為 20
+
+### ✅ 小結
+| 時間點        | Stack 記憶體            | Heap 記憶體       |
+| ---------- | -------------------- | -------------- |
+| 初始化        | `a` 和 `p` 尚未賦值       | 無配置            |
+| 第一次 malloc | `p` → 指向 `0x400`     | `0x400` = `10` |
+| free(p)    | `p` 保留，但 `0x400` 被釋放 | 空間變成可再利用       |
+| 第二次 malloc | `p` 仍指向 `0x400`      | `0x400` = `20` |
 ---
 ## 9. Dynamic Memory Allocation in C-malloc calloc realloc free
 
