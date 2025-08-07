@@ -34,10 +34,9 @@
   - [calloc (Contiguous Allocation)](#calloc-contiguous-allocation)
   - [realloc (Reallocate Memory)](#realloc-reallocate-memory)
 - [10. Pointers as Function Returns in C/C++](#10-pointers-as-function-returns-in-cc)
-  - [使用 malloc 與 free 後的指標行為說明](#使用-malloc-與-free-後的指標行為說明)  使用 realloc 調整記憶體大小的行為說明
+  - [使用 malloc 與 free 後的指標行為說明](#使用-malloc-與-free-後的指標行為說明)
   - [使用 realloc 調整記憶體大小的行為說明](#使用-realloc-調整記憶體大小的行為說明)
-
-
+  - [Heap 與 Stack 回傳指標的差異](#heap-與-stack-回傳指標的差異)
 - [11. Function Pointers in C / C++](#11-function-pointers-in-c--c)
 - [12. Function Pointers and Callbacks](#12-function-pointers-and-callbacks)
 - [13. Memory Leak in C/C++](#13-memory-leak-in-cc)
@@ -775,6 +774,57 @@ if (tmp != NULL) {
 | **成功（搬家）**   | 非 `NULL`，與 `A` 不同  | ❌ 不可再用（已被釋放） | 資料已複製到 `B` |
 | **失敗**       | `NULL`             | ✅ 仍有效（原資料還在） | 無變化        |
 ---
+### Heap 與 Stack 回傳指標的差異
+[查看程式碼 ➜](10.Pointers%20as%20Function%20Returns%20in%20C/pointerAsFunctionReturns.c)
+
+### 1️⃣ main 的區域變數與呼叫通訊
+```c
+int a = 2, b = 4;
+ptr = addByPointer(&a, &b);
+```
+- `a`、`b` 都在 **main** 的 **Stack frame** 裡。
+
+- 我們把兩個變數的位址傳進 `addByPointer`。
+---
+### 2️⃣ 在函式中使用 malloc
+```c
+int *c = (int*)malloc(sizeof(int));
+*c = (*a) + (*b);
+return c;
+```
+- `c` 指向 **Heap** 裡新配置的一格整數空間。
+
+- 資料寫進 Heap 中，即使函式結束，**記憶體仍然有效**。
+
+- 回傳的是 **Heap 地址**，不是區域變數地址。
+---
+### 3️⃣ 如果改成 Stack 區域變數會發生什麼？
+```c
+int c = (*a) + (*b);
+return &c;   // ❌ 危險：c 在函式內的 Stack
+```
+- 函式結束時，`c` 所在的 **Stack frame** 會被標記為可用。
+
+- 後續任何呼叫（例如又呼叫另一個函式）都可能覆蓋它。
+
+- 沒被覆蓋時「看似可用」，但不穩定。
+---
+### 4️⃣ 假設情境 — Stack 被覆蓋
+- **情境 A（運氣好）**
+呼叫 `addInStack()` 後立刻用回傳指標去取值 → Stack 那塊還沒被覆寫 → 你看到對的值。
+
+- **情境 B（危險）**
+呼叫 `addInStack()` 後再呼叫其他函式（例如 `printHelloWorld()`）→ 新的 Stack frame 覆蓋原位置 → 值亂掉或程式崩潰。
+
+---
+### 5️⃣ 為什麼 Heap 安全
+- Heap 空間不會因為函式結束自動釋放。
+
+- 除非手動 `free()`，否則內容不會被新函式覆蓋。
+
+- 適合用在需要函式外繼續使用資料的情況。
+---
+
 ## 11. Function Pointers in C / C++
 
 ## 12. Function Pointers and Callbacks
