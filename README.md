@@ -675,7 +675,7 @@ p = (int *)realloc(p, 5 * sizeof(int));
 
 ## 10. Pointers as Function Returns in C/C++
 ### 🧠 使用 malloc 與 free 後的指標行為說明
-[查看程式碼 ➜](10.Pointers%20as%20Function%20Returns%20in%20C/basicUsage.c)
+[查看程式碼 ➜](10.Pointers%20as%20Function%20Returns%20in%20C/malloc-free.c)
 
 ### 🔍 為什麼 A[2] = 6 還能動作？
 | 名稱        | 說明                                        |
@@ -687,7 +687,7 @@ p = (int *)realloc(p, 5 * sizeof(int));
 ---
 
 ### ⚠️ 為什麼這樣危險？
-- 使用 free() 後的記憶體稱為 dangling pointer（懸空指標）
+- 使用 `free()` 後的記憶體稱為 dangling pointer（懸空指標）
 
 - 雖然你仍能訪問那塊記憶體，但：
 
@@ -716,7 +716,31 @@ A = NULL;  // ✅ 清除指標，防止誤用
 | `free(ptr)`  | 回收 Heap 空間，但不改變指標 `ptr` 的值  |
 | `ptr = NULL` | ⭐ 安全習慣！阻止後續對無效記憶體的訪問        |
 | 存取已釋放記憶體     | ❌ 未定義行為，可能 crash、可能成功、可能毀資料 |
+---
+### 🔄 realloc 的作用
+## 運作原理
+- realloc(ptr, new_size) 嘗試：
 
+  1.**原地擴張或縮小**：如果新大小在原記憶體位置可容納，直接調整容量，指標不變。
+
+  2.**搬移到新位置**：如果原地無法擴張，會分配新區塊、複製舊資料，並釋放舊區塊。
+→ 因此**不保證回傳的新指標與原指標相同**。
+
+## 特殊用途
+- 當作 `free`
+  `realloc(ptr, 0)` 等同釋放 `ptr` 指向的記憶體。
+
+- 當作 malloc
+  `realloc(NULL, size)` 等同 `malloc(size)`
+
+## 注意事項
+- `realloc` 成功 → 舊指標視為無效，**只能使用新指標**。
+
+- `realloc` 失敗 → 回傳`NULL`，**原指標仍有效**，必須自行`free`。
+
+- 縮小記憶體後，存取超過新範圍的內容屬於**未定義行為**可能讀到垃圾值、甚至程式崩潰）。
+
+- 印指標位址請用 `%p` 並轉型成 (`void*`)，不要用 `%d`。
 
 ## 11. Function Pointers in C / C++
 
