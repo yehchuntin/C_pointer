@@ -30,6 +30,9 @@
   - [Heap 是什麼？該如何使用它？](#heap-是什麼-該如何使用它)
   - [malloc 的記憶體配置動態與圖解](#malloc-的記憶體配置動態與圖解)
 - [9. Dynamic memory allocation in C - malloc calloc realloc free](#9-Dynamic-memory-allocation-in-C-malloc-calloc-realloc-free)
+  - [malloc (Memory Allocation)](#malloc-memory-allocation)
+  - [calloc (Contiguous Allocation)](#calloc-contiguous-allocation)
+  - [realloc (Reallocate Memory)](#realloc-reallocate-memory)
 - [10. Pointers as Function Returns in C/C++](#10-pointers-as-function-returns-in-cc)
 - [11. Function Pointers in C / C++](#11-function-pointers-in-c--c)
 - [12. Function Pointers and Callbacks](#12-function-pointers-and-callbacks)
@@ -576,6 +579,94 @@ p = (int*)malloc(sizeof(int));
 | 第二次 malloc | `p` 指向 `400`      | `400` = `20` |
 ---
 ## 9. Dynamic Memory Allocation in C-malloc calloc realloc free
+## malloc (Memory Allocation)
+
+```c
+void* malloc(size_t size);
+```
+
+### ☑️ 參數說明：
+
+* `size` → 總共要配置的記憶體大小（位元組）
+
+### ☑️ 功能：
+
+* 配置一塊記憶體空間
+* **內容不初始化（為垃圾值）**
+* 回傳 `void*` 指標，需轉型
+
+### ☑️ 範例：
+
+```c
+int *p = (int *)malloc(3 * sizeof(int));
+```
+
+### ☑️ 回收空間：
+
+```c
+free(p);
+```
+
+---
+## calloc (Contiguous Allocation)
+
+```c
+void* calloc(size_t num, size_t size);
+```
+
+### ☑️ 參數說明：
+
+* `num` → 要配置的元素個數（number of elements）
+* `size` → 每個元素的大小（使用 `sizeof(type)`）
+
+### ☑️ 功能：
+
+* 配置一塊連續記憶體空間
+* **內容自動初始化為 0**
+* 回傳 `void*` 指標，需轉型
+
+### ☑️ 範例：
+
+```c
+int *p = (int *)calloc(3, sizeof(int));
+```
+---
+## realloc (Reallocate Memory)
+
+```c
+void* realloc(void* ptr, size_t new_size);
+```
+
+### ☑️ 參數說明：
+
+* `ptr` → 原本的記憶體指標（可為 NULL）
+* `new_size` → 新的記憶體大小（位元組）
+
+### ☑️ 功能：
+
+* 調整已配置記憶體區塊的大小：
+
+  * 增加：可能搬移位置（內容會保留）
+  * 減少：前段保留，後段釋放
+* `ptr == NULL` → 等同 malloc
+* `new_size == 0` → 等同 free
+
+### ☑️ 範例：
+
+```c
+int *p = (int *)malloc(3 * sizeof(int));
+p = (int *)realloc(p, 5 * sizeof(int));
+```
+
+---
+
+## 4. 總結
+
+| 函式        | 自動初始化 | 可調整大小 | 備註         |
+| --------- | ----- | ----- | ---------- |
+| `malloc`  | ❌ 否   | ❌ 否   | 需自行初始化     |
+| `calloc`  | ✅ 是   | ❌ 否   | 初始化為 0     |
+| `realloc` | ❌ 否   | ✅ 是   | 調整大小並保留原資料 |
 
 ## 10. Pointers as Function Returns in C/C++
 
