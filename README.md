@@ -442,6 +442,10 @@ C[i][j][k] = *(*(C[i]+j)+k)
 - `Square()` 和 `SquareOfSum()` 是 程式碼 → 放 `Text` 區
 - 它們和 `main()` 的順序無關，因為「寫在上面 ≠ 放在上面」
 ---
+### Stack Overflow 是什麼？
+在 C 語言中，**Stack Overflow（堆疊溢位）**是指：
+
+>程式使用過多的 stack 記憶體，導致超出系統所配置的限制，進而 程式崩潰或產生未定義行為。
 
 ## 9. Dynamic Memory Allocation in C-malloc calloc realloc free
 
