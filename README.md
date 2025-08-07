@@ -414,6 +414,28 @@ C[i][j][k] = *(*(C[i]+j)+k)
 
 
 ## 8. Pointers and Dynamic Memory-Stack vs Heap
+### 🔁 C 函式執行與記憶體配置
+<img src="images/stack-vs-heap.png" width="500">
+
+### 📂 記憶體分區（高→低地址）
+- `Heap`：動態配置用 malloc
+- `Stack`：函式的參數與區域變數
+- `Static/Global`：全域變數、static變數
+- `Code`：可執行程式碼
+
+### 💡 變數分布位置
+| 變數       | 所屬區域     | 位於記憶體哪一區         |
+|------------|--------------|---------------------------|
+| `total`    | 全域變數     | Static / Global 區        |
+| `a, b`     | main 的區域變數 | Stack                    |
+| `x, y, z`  | SquareOfSum 的區域變數 | Stack             |
+| `x`（12）  | Square 的參數 | Stack（呼叫 Square 時）  |
+
+### 📌 執行流程
+1. `main()` 呼叫 `SquareOfSum(a, b)` → 建立新的 Stack frame
+2. `SquareOfSum()` 呼叫 `Square(x + y)` → 再建一個 Stack frame
+3. 函式結束 → 一層一層釋放 Stack
+
 
 ## 9. Dynamic Memory Allocation in C-malloc calloc realloc free
 
