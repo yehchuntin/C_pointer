@@ -24,7 +24,9 @@
 - [7. Pointers and multidimensional arrays](#7-Pointers-and-multidimensional-arrays)
   - [陣列傳入函式的型態規則](#陣列傳入函式的型態規則) 
   - [三維陣列的存取等價式](#三維陣列的存取等價式) 
-- [8. Pointers and dynamic memory - stack vs heap](#8-Pointers-and-dynamic-memory-stack-vs-heap)
+- [8. Pointers and dynamic memory - stack vs heap](#8-Pointers-and-dynamic-memory-stack-vs-heap) 
+  - [C 函式執行與記憶體配置](#c-函式執行與記憶體配置)
+
 - [9. Dynamic memory allocation in C - malloc calloc realloc free](#9-Dynamic-memory-allocation-in-C-malloc-calloc-realloc-free)
 - [10. Pointers as Function Returns in C/C++](#10-pointers-as-function-returns-in-cc)
 - [11. Function Pointers in C / C++](#11-function-pointers-in-c--c)
@@ -410,11 +412,10 @@ C[i][j][k] = *(*(C[i]+j)+k)
 - `+k`：移動到該列的第 k 元素
 
 - `*`：取值
-
-
+---
 
 ## 8. Pointers and Dynamic Memory-Stack vs Heap
-### 🔁 C 函式執行與記憶體配置
+### C 函式執行與記憶體配置
 <img src="images/stack-vs-heap.png" width="500">
 
 ### 📂 記憶體分區（高→低地址）
@@ -436,6 +437,11 @@ C[i][j][k] = *(*(C[i]+j)+k)
 2. `SquareOfSum()` 呼叫 `Square(x + y)` → 再建一個 Stack frame
 3. 函式結束 → 一層一層釋放 Stack
 
+### 🧠 總結一句話記住：
+- `total` 是 資料（變數）→ 放 `Global` 區
+- `Square()` 和 `SquareOfSum()` 是 程式碼 → 放 `Text` 區
+- 它們和 `main()` 的順序無關，因為「寫在上面 ≠ 放在上面」
+---
 
 ## 9. Dynamic Memory Allocation in C-malloc calloc realloc free
 
