@@ -718,6 +718,7 @@ A = NULL;  // ✅ 清除指標，防止誤用
 | 存取已釋放記憶體     | ❌ 未定義行為，可能 crash、可能成功、可能毀資料 |
 ---
 ### 🧠 使用 realloc 調整記憶體大小的行為說明
+
 [查看程式碼 ➜](10.Pointers%20as%20Function%20Returns%20in%20C/reallocUsage.c)
 ---
 ### 常見操作：
@@ -740,6 +741,11 @@ A = NULL;  // ✅ 清除指標，防止誤用
 - `realloc(ptr, 0)` → 等同 `free(ptr)`
 
 - `realloc(NULL, size)` → 等同 `malloc(size)`
+- 實例:
+```c
+B = realloc(A, 0);             // 等同 free(A)
+int *B = realloc(NULL, n * sizeof(int)); // 等同 malloc
+```
 ---
 ### ⚠️ 安全性（務必遵守）
 - **不要**直接寫 `A = realloc(A, new_size);`
