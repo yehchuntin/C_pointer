@@ -668,6 +668,8 @@ p = (int *)realloc(p, 5 * sizeof(int));
 | `calloc`  | ✅ 是   | ❌ 否   | 初始化為 0     |
 | `realloc` | ❌ 否   | ✅ 是   | 調整大小並保留原資料 |
 
+---
+
 ## 10. Pointers as Function Returns in C/C++
 
 ## 11. Function Pointers in C / C++
