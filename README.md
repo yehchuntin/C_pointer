@@ -720,12 +720,14 @@ A = NULL;  // ✅ 清除指標，防止誤用
 ### 🧠 使用 realloc 調整記憶體大小的行為說明
 <sub>[查看程式碼 ➜](10.Pointers%20as%20Function%20Returns%20in%20C/reallocUsage.c)</sub>
 ---
+
+
 ### 常見操作：
 
 - 放大：`int* B = realloc(A, 2 * n * sizeof *A);`
 
 - 縮小：`int* B = realloc(A, (n / 2) * sizeof *A);`
-
+---
 ### 原理說明：
 
 - 若**原位置後方空間足夠** → 嘗試**原地調整**（`B` 可能等於 `A`）。
@@ -769,8 +771,7 @@ if (tmp != NULL) {
 | **成功（原地擴縮）** | 非 `NULL`，且與 `A` 相同 | 同 `B`        | 資料保留       |
 | **成功（搬家）**   | 非 `NULL`，與 `A` 不同  | ❌ 不可再用（已被釋放） | 資料已複製到 `B` |
 | **失敗**       | `NULL`             | ✅ 仍有效（原資料還在） | 無變化        |
-
-
+---
 ## 11. Function Pointers in C / C++
 
 ## 12. Function Pointers and Callbacks
