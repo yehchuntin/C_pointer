@@ -34,6 +34,10 @@
   - [calloc (Contiguous Allocation)](#calloc-contiguous-allocation)
   - [realloc (Reallocate Memory)](#realloc-reallocate-memory)
 - [10. Pointers as Function Returns in C/C++](#10-pointers-as-function-returns-in-cc)
+  - [使用 malloc 與 free 後的指標行為說明](#使用-malloc-與-free-後的指標行為說明)  使用 realloc 調整記憶體大小的行為說明
+  - [使用 realloc 調整記憶體大小的行為說明](#使用-realloc-調整記憶體大小的行為說明)
+
+
 - [11. Function Pointers in C / C++](#11-function-pointers-in-c--c)
 - [12. Function Pointers and Callbacks](#12-function-pointers-and-callbacks)
 - [13. Memory Leak in C/C++](#13-memory-leak-in-cc)
@@ -674,7 +678,7 @@ p = (int *)realloc(p, 5 * sizeof(int));
 ---
 
 ## 10. Pointers as Function Returns in C/C++
-### 🧠 使用 malloc 與 free 後的指標行為說明
+### 使用 malloc 與 free 後的指標行為說明
 [查看程式碼 ➜](10.Pointers%20as%20Function%20Returns%20in%20C/malloc-free.c)
 
 ### 🔍 為什麼 A[2] = 6 還能動作？
@@ -717,7 +721,7 @@ A = NULL;  // ✅ 清除指標，防止誤用
 | `ptr = NULL` | ⭐ 安全習慣！阻止後續對無效記憶體的訪問        |
 | 存取已釋放記憶體     | ❌ 未定義行為，可能 crash、可能成功、可能毀資料 |
 ---
-### 🧠 使用 realloc 調整記憶體大小的行為說明
+### 使用 realloc 調整記憶體大小的行為說明
 [查看程式碼 ➜](10.Pointers%20as%20Function%20Returns%20in%20C/reallocUsage.c)
 
 ---
