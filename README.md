@@ -26,7 +26,8 @@
   - [三維陣列的存取等價式](#三維陣列的存取等價式) 
 - [8. Pointers and dynamic memory - stack vs heap](#8-Pointers-and-dynamic-memory-stack-vs-heap) 
   - [C 函式執行與記憶體配置](#c-函式執行與記憶體配置)
-  - [Stack Overflow 是什麼？](#stack-overflow-是什麼？) 
+  - [Stack Overflow 是什麼？](#stack-overflow-是什麼)
+  - [Heap 是什麼？該如何使用它？](#heap-是什麼-該如何使用它)
 
 
 - [9. Dynamic memory allocation in C - malloc calloc realloc free](#9-Dynamic-memory-allocation-in-C-malloc-calloc-realloc-free)
@@ -480,8 +481,34 @@ C[i][j][k] = *(*(C[i]+j)+k)
 | 發生位置 | 函式呼叫堆疊         | 動態配置區域（malloc） |
 | 常見原因 | 遞迴太深、變數太大      | 寫入超出配置的記憶體範圍   |
 | 解決方式 | 減少遞迴/改 malloc  | 加強邊界檢查         |
+---
+### Heap 是什麼？ 該如何使用它?
+> 在 `C/C++` 程式中，`Heap（堆積區`） 是一塊專門給程式`動態配置記憶體`的空間，也就是我們「需要多少、什麼時候配置、何時釋放」都由程式設計師來決定。
 
+### 🧠 Heap 的基本概念
+- Heap 是應用程式的一部分記憶體空間，由作業系統分配，容量大。
 
+- Heap 裡的資料不像 Stack 會自動釋放，必須手動處理。
+
+- 常用於儲存：陣列、結構、鏈結串列等大型或不定大小的資料。
+
+在右圖中，Heap 是記憶體的藍色區塊，位於 Stack 之上，是整體 Application's memory 的一部分。
+
+### 🛠️ C/C++ 中的 Heap 使用方式
+| 語言  | 使用方式                                           | 範例                                  |
+| --- | ---------------------------------------------- | ----------------------------------- |
+| C   | 使用函式 `malloc`、`calloc`、`realloc`、`free` 來操作記憶體 | `int *p = malloc(4 * sizeof(int));` |
+| C++ | 使用運算子 `new`、`delete` 來操作記憶體                    | `int *p = new int[4];`              |
+
+這些函式與運算子都會向 Heap 區域申請一塊記憶體。
+
+### 📌 注意事項
+- Heap 使用後記得釋放：free() (C)、delete (C++)。
+
+- 忘記釋放會導致 記憶體洩漏（Memory Leak）。(後面會提到!)
+
+- Stack 是系統自動管理；Heap 是由你來管理！
+---
 ## 9. Dynamic Memory Allocation in C-malloc calloc realloc free
 
 ## 10. Pointers as Function Returns in C/C++
