@@ -580,6 +580,7 @@ p = (int*)malloc(sizeof(int));
 ---
 ## 9. Dynamic Memory Allocation in C-malloc calloc realloc free
 ## malloc (Memory Allocation)
+<img src="images/mallocUsage.png" width="500">
 
 ```c
 void* malloc(size_t size);
@@ -593,7 +594,7 @@ void* malloc(size_t size);
 
 * 配置一塊記憶體空間
 * **內容不初始化（為垃圾值）**
-* 回傳 `void*` 指標，需轉型
+* 回傳 `void*` 指標，需轉型 ex:`(int *)`、`(char *)`
 
 ### ☑️ 範例：
 
@@ -609,6 +610,7 @@ free(p);
 
 ---
 ## calloc (Contiguous Allocation)
+<img src="images/callocUsage.png" width="500">
 
 ```c
 void* calloc(size_t num, size_t size);
@@ -623,7 +625,7 @@ void* calloc(size_t num, size_t size);
 
 * 配置一塊連續記憶體空間
 * **內容自動初始化為 0**
-* 回傳 `void*` 指標，需轉型
+* 回傳 `void*` 指標，需轉型 ex:`(int *)`、`(char *)`
 
 ### ☑️ 範例：
 
@@ -632,6 +634,7 @@ int *p = (int *)calloc(3, sizeof(int));
 ```
 ---
 ## realloc (Reallocate Memory)
+<img src="images/reallocateUsage.png" width="500">
 
 ```c
 void* realloc(void* ptr, size_t new_size);
