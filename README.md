@@ -26,6 +26,8 @@
   - [三維陣列的存取等價式](#三維陣列的存取等價式) 
 - [8. Pointers and dynamic memory - stack vs heap](#8-Pointers-and-dynamic-memory-stack-vs-heap) 
   - [C 函式執行與記憶體配置](#c-函式執行與記憶體配置)
+  - [Stack Overflow 是什麼？](#stack-overflow-是什麼？) 
+
 
 - [9. Dynamic memory allocation in C - malloc calloc realloc free](#9-Dynamic-memory-allocation-in-C-malloc-calloc-realloc-free)
 - [10. Pointers as Function Returns in C/C++](#10-pointers-as-function-returns-in-cc)
@@ -458,6 +460,26 @@ C[i][j][k] = *(*(C[i]+j)+k)
 
 - 它的記憶體大小是有限的（通常幾 MB 而已）
 
+### ⚠️ 什麼情況會發生 Stack Overflow？
+| 情況       | 範例                   | 說明                       |
+| -------- | -------------------- | ------------------------ |
+| 遞迴呼叫太深   | `func() { func(); }` | 每次呼叫都會占用一個新的 stack frame |
+| 區域變數開太大  | `int A[10000000];`   | 區域陣列太大，超過 stack 容量       |
+| 多層函式大量呼叫 | 太多函式巢狀，每層都有大量區域變數    | 累積太多 stack frame 導致溢位    |
+
+### 🛠️ 如何避免 Stack Overflow？
+- 避免無窮遞迴
+
+- 不要在 Stack 宣告超大陣列（改用 `malloc` 動態配置 → 放在 Heap）
+
+- 遞迴轉迴圈（如 DFS）
+
+### 📌 Stack Overflow vs Heap Overflow？
+| 分類   | Stack Overflow | Heap Overflow  |
+| ---- | -------------- | -------------- |
+| 發生位置 | 函式呼叫堆疊         | 動態配置區域（malloc） |
+| 常見原因 | 遞迴太深、變數太大      | 寫入超出配置的記憶體範圍   |
+| 解決方式 | 減少遞迴/改 malloc  | 加強邊界檢查         |
 
 
 ## 9. Dynamic Memory Allocation in C-malloc calloc realloc free
