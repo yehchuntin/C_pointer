@@ -38,6 +38,8 @@
   - [使用 realloc 調整記憶體大小的行為說明](#使用-realloc-調整記憶體大小的行為說明)
   - [Heap 與 Stack 回傳指標的差異](#heap-與-stack-回傳指標的差異)
 - [11. Function Pointers in C / C++](#11-function-pointers-in-c--c)
+  - [function pointer原理解釋](#function-pointer原理解釋)
+  - [function pointer實例操作](#function-pointer實例操作)
 - [12. Function Pointers and Callbacks](#12-function-pointers-and-callbacks)
 - [13. Memory Leak in C/C++](#13-memory-leak-in-cc)
 
@@ -926,7 +928,7 @@ void (*fp)() = func1;
 
 - 函式指標實際上儲存的是「函式的起始位址」。
 ---
-### 實例操作
+### function pointer實例操作
 [查看程式碼 ➜](11.functionPointersInC/functionPointer.c)
 #### (1)宣告函式
 ```c
