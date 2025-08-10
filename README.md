@@ -262,7 +262,9 @@ C[0] = 'A';             // ❌ 這裡會導致 Segmentation Fault (嘗試修改�
 - `C`是指向常量字串的指標 → 嘗試`C[0] = 'A';`會造成**執行期錯誤 (Segmentation Fault)**。
 ---
 2️⃣ 主要錯誤
+
 你不能修改`char *C = "Hello";`指向的內容，因為這是一個編譯期常量。
+
 正確的作法：
 ```c
 char C[20] = "Hello"; // OK: 可以修改
