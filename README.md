@@ -1054,4 +1054,146 @@ B(A);  // 直接傳函式名，效果相同
 - 在`B`中，`ptr`也是一個函式指標，呼叫`ptr()`就等於執行`A()`。
 ---
 
+### BubbleSort by Callback
+## 範例程式碼
+```c
+#include<stdio.h>
+
+int compare(int first,int second){
+    if(first>second) return 1;
+    else return -1; // 可以更改回傳值邏輯來決定升冪或降冪
+}
+
+void BubbleSort(int *A,int size,int (*compare)(int,int)){ // 參數接收 callback function
+    int i,j,temp;
+    for(i=0;i<size-1;i++){
+        for(j=0;j<size-1-i;j++){
+            if( (compare(A[j],A[j+1]) > 0) ){
+                temp=A[j];
+                A[j]=A[j+1];
+                A[j+1]=temp;
+            }
+        }
+    }
+}
+
+int main(){
+    int A[]={3,2,1,5,6,4};
+   
+    BubbleSort(A,6,compare); // 傳入函式指標（callback function）
+    for(int i=0;i<6;i++) printf("%d ",A[i]);
+
+    return 0;
+}
+```
+#### Callback Function 是什麼？
+- **定義**：將一個函式的位址（函式指標）作為參數傳給另一個函式，並由該函式在適當時機呼叫它。
+
+- 在本例中：
+
+  - `compare`是被傳入`BubbleSort`的**callback function**。
+
+  - `BubbleSort`透過`compare(A[j], A[j+1])`呼叫這個外部邏輯來判斷排序順序。
+
+---
+#### 為什麼不直接在 `BubbleSort` 內呼叫 `compare()`？
+**直接呼叫版本**
+```c
+void BubbleSort(int *A,int size) {
+    for (...) {
+        if (compare(A[j], A[j+1]) > 0) {
+            // swap
+        }
+    }
+}
+```
+✅ 可行，但：
+
+- 綁死只能使用這個 `compare`。
+
+- 要改成降冪排序必須修改 `BubbleSort` 內部程式碼並重新編譯。
+
+- 無法在同一次執行中選擇不同排序規則。
+
+**傳 callback 版本**
+```c
+void BubbleSort(int *A,int size,int (*compare)(int,int)) { ... }
+```
+✅ 好處：
+- **解耦**：排序演算法與比較邏輯分開。
+
+- **可重用**：同一份排序程式可以支援多種排序規則。
+
+- **靈活性**：可以在 runtime 依情況決定比較邏輯（升冪、降冪、自訂規則）。
+---
+#### 3️⃣ 語法重點
+**1.函式指標的宣告**
+```c
+int (*compare)(int,int)
+```
+- 外層括號不可省略，否則會變成 `int *compare(int,int)`（代表回傳 int* 的函式）。
+
+- 簽名必須與實際傳入的函式完全一致。
+
+**2.函式名會退化為指標**
+
+- 在 `main` 中 `compare`（不加 `()`）會自動轉成指向該函式的位址。
+
+- 所以 `BubbleSort(A, 6, compare)` 與 `BubbleSort(A, 6, &compare)` 等價。
+
+**3.呼叫函式指標**
+- 可用 `compare(x, y)` 或 `(*compare)(x, y)`，兩者等價。
+
+---
+#### 4️⃣ 常見錯誤與避免方法
+| 錯誤類型      | 錯誤範例                          | 為什麼錯                  | 正確寫法                        |
+| --------- | ----------------------------- | --------------------- | --------------------------- |
+| 宣告括號錯誤    | `int *compare(int,int)`       | 變成「回傳 int\* 的函式」      | `int (*compare)(int,int)`   |
+| 呼叫時加 `()` | `BubbleSort(A, 6, compare())` | 這會先執行函式並傳回 int，不是函式位址 | `BubbleSort(A, 6, compare)` |
+| 括號優先順序錯   | `compare(A[j], A[j+1] > 0)`   | 會先計算布林值再傳入            | `compare(A[j], A[j+1]) > 0` |
+| 參數型態不符    | `void (*compare)(int,int)`    | 簽名不同可能編譯錯誤或未定義行為      | 型態必須一致                      |
+| 沒處理相等     | 永遠回 1 或 -1                    | 導致排序不穩定               | 相等時回 0                      |
+---
+#### 5️⃣ 範例：切換排序方式
+```c
+int ascending(int a, int b) {
+    return a - b; // 升冪
+}
+
+int descending(int a, int b) {
+    return b - a; // 降冪
+}
+
+BubbleSort(A, n, ascending);
+BubbleSort(A, n, descending);
+```
+- 只換傳入的 callback function，`BubbleSort` 本身不用改任何程式碼。
+---
+#### 6️⃣ 執行流程圖
+```c
+main()
+   │
+   ├─ 呼叫 BubbleSort(A, 6, compare)
+   │               │
+   │               ▼
+   │         BubbleSort 收到 compare 的位址
+   │               │
+   │         迴圈中呼叫 compare(A[j],A[j+1])
+   │               │
+   ▼               ▼
+ compare() 根據邏輯回傳 1/-1/0
+   │
+   └─ 回到 BubbleSort 判斷是否交換元素
+```
+---
+##### ️⃣ 總結
+- 直接 `call compare()` → 簡單，但耦合度高、彈性差。
+
+- **透過參數傳 callback** → 多一個參數，但可重用性高、可動態更換邏輯。
+
+- 如果排序邏輯固定且不會變，可直接 call；
+如果需要通用化或支援多種排序規則，建議使用 callback function。
+
+---
+
 ## 13. Memory Leak in C/C++
