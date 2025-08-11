@@ -999,7 +999,12 @@ ptr("Mia");         // 呼叫 PrintHello("Mia")
 ---
 ## 12. Function Pointers and Callbacks
 ### function pointer 基本範例
+[查看程式碼 ➜](12.functionPointersAndCallbacks/callback-example.c)
+
+---
+
 ### 📝 重要觀念
+---
 #### Callback Function（回呼函式）
 - **定義**：一個函式的指標被當作參數傳給另一個函式，並在該函式中被呼叫。
 
