@@ -1297,7 +1297,7 @@ int main() {
 
 - **排序核心不變**：
 
-  -`BubbleSort` 不需知道是什麼排序規則，透過 callback 動態呼叫比較邏輯。
+  - `BubbleSort` 不需知道是什麼排序規則，透過 callback 動態呼叫比較邏輯。
 ---
 **延伸討論：為什麼不用 if 寫死？**
 如果用 `if` 或直接在 `BubbleSort` 裡寫 `A[j] > A[j+1]`，
@@ -1316,4 +1316,106 @@ int main() {
 
 - 讓演算法與比較邏輯解耦，增加可重用性與可維護性
 ---
+### Quick Sort by Callback
+#### 範例程式碼
+```c
+#include<stdio.h>   // printf() 用
+#include<math.h>    // abs() 等數學函式（這裡其實沒用到）
+#include<stdlib.h>  // qsort() 用
+
+// 比較函式，供 qsort 呼叫
+// 參數 a, b 是「陣列元素的位址」，型態是 const void*（泛型指標）
+// qsort 不知道元素型態，所以用 void*，我們必須自行轉型
+int compare(const void* a, const void* b){
+    // 1. 先把泛型指標轉成 int*，表示它實際上指向整數
+    // 2. 再用 * 取出該位址上的整數值
+    int A = *((int*)a);
+    int B = *((int*)b);
+
+    // 回傳 A - B
+    // qsort 規則：
+    // >0 → A 應排在 B 後面
+    // <0 → A 應排在 B 前面
+    // =0 → A 與 B 視為相等
+    return A - B; // 這裡代表升冪排序
+}
+
+int main(){
+    // 原始陣列
+    int A[] = {-31, 22, -1, 50, -6, 4};
+
+    // 呼叫 qsort 進行排序
+    // qsort(
+    //   陣列起始位址,
+    //   陣列元素數量,
+    //   單一元素大小（位元組數）,
+    //   比較函式指標
+    // )
+    qsort(A, 6, sizeof(int), compare);
+
+    // 輸出排序後的陣列
+    for(int i = 0; i < 6; i++)
+        printf("%d ", A[i]);
+    // 輸出結果: -31 -6 -1 4 22 50
+
+    return 0;
+}
+```
+#### 1️⃣ 這段程式的目的是什麼？
+它的功能是 用 **C 標準函式庫的 `qsort()`** 來排序一個整數陣列
+在這裡，陣列是：
+```c
+{-31, 22, -1, 50, -6, 4}
+```
+排序後會變成：
+```c
+-31 -6 -1 4 22 50
+```
+---
+#### 2️⃣ qsort 是什麼？
+- **定義**：`qsort`（Quick Sort）是 C 標準函式庫 `<stdlib.h>` 提供的泛型排序函式。
+
+- **好處**：可以排序任何型態的資料（整數、浮點數、字串、結構），不需要自己寫排序演算法。
+
+- **函式原型**：
+```c
+void qsort(
+    void *base,              // 要排序的陣列起始位址
+    size_t nitems,           // 陣列元素數量
+    size_t size,             // 每個元素大小（位元組）
+    int (*compare)(const void *, const void *) // 比較函式
+);
+```
+#### 3️⃣ compare 函式
+```c
+int compare(const void* a, const void* b){
+    int A = *((int*)a); // 把 void* 轉成 int* 再取值
+    int B = *((int*)b);
+
+    return A - B; // 升冪排序：A > B 回正數，A < B 回負數
+}
+```
+- 因為 `qsort` 是**泛型**，不知道你要排的是什麼型態，所以會把元素指標傳進來，型態是 `const void*`（泛型指標）。
+  - 因為它不知道你陣列裡的元素型態，所以它只能用「泛型指標」void* 來接收元素地址。
+
+  - const 是保護作用，表示 qsort 在比較時不會修改元素內容。
+
+  - 💡 重點：
+
+  - const void* 只是一個「不知道裡面是什麼型態的地址」。
+
+  - 要用它，必須自己轉回正確型態。
+
+- 在比較函式裡，我們必須自己把它轉回正確型態（這裡是 int*）。
+
+##### 圖解記憶
+假設第一次呼叫：
+```c
+a → &A[0]   (位址)
+b → &A[1]   (位址)
+
+(int*)a  → 把泛型指標轉成 int 指標
+*((int*)a) → 取出該位置的整數值
+```
+
 ## 13. Memory Leak in C/C++
