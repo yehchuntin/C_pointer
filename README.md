@@ -41,6 +41,16 @@
   - [function pointer原理解釋](#function-pointer原理解釋)
   - [function pointer實例操作](#function-pointer實例操作)
 - [12. Function Pointers and Callbacks](#12-function-pointers-and-callbacks)
+  - [function pointer 基本範例](#function-pointer-基本範例)
+  - [BubbleSort by Callback](#BubbleSort-by-Callback)
+  - [延伸應用：多種排序邏輯](#延伸應用多種排序邏輯)
+  - [QuickSort by Callback](#QuickSort-by-Callback)
+
+
+
+
+
+
 - [13. Memory Leak in C/C++](#13-memory-leak-in-cc)
 
 
@@ -1200,8 +1210,6 @@ main()
 
 ### 延伸應用：多種排序邏輯
 
-[查看程式碼 ➜](12.functionPointersAndCallbacks/absSortByCallback.c)
-
 上面範例中，我們只用一個 `compare` 函式實現單一的比較規則（升冪）。  
 但如果需求增加，例如要支援 **升冪 / 降冪**、**正常值 / 絕對值** 四種不同模式，  
 就可以定義多個比較函式，並在 `main` 中根據使用者選擇傳入對應的函式指標。
@@ -1215,75 +1223,9 @@ main()
 
 ---
 #### 範例程式碼：四種排序模式
-```c
-#include <stdio.h>
-#include <math.h>
 
-// 正常值升冪
-int compare_normal_asc(int a, int b) {
-    return a - b;
-}
+[查看程式碼 ➜](12.functionPointersAndCallbacks/absSortByCallback.c)
 
-// 正常值降冪
-int compare_normal_desc(int a, int b) {
-    return b - a;
-}
-
-// 絕對值升冪
-int compare_abs_asc(int a, int b) {
-    return abs(a) - abs(b);
-}
-
-// 絕對值降冪
-int compare_abs_desc(int a, int b) {
-    return abs(b) - abs(a);
-}
-
-void BubbleSort(int *A, int size, int (*compare)(int, int)) {
-    int i, j, temp;
-    for (i = 0; i < size - 1; i++) {
-        for (j = 0; j < size - 1 - i; j++) {
-            if (compare(A[j], A[j + 1]) > 0) {
-                temp = A[j];
-                A[j] = A[j + 1];
-                A[j + 1] = temp;
-            }
-        }
-    }
-}
-
-int main() {
-    int A[] = {-31, 22, -1, 50, -6, 4};
-    int n = sizeof(A) / sizeof(A[0]);
-    int choice;
-
-    printf("選擇排序方式:\n");
-    printf("1: 正常值升冪\n");
-    printf("2: 正常值降冪\n");
-    printf("3: 絕對值升冪\n");
-    printf("4: 絕對值降冪\n");
-    printf("輸入選項 (1-4): ");
-    scanf("%d", &choice);
-
-    switch (choice) {
-        case 1: BubbleSort(A, n, compare_normal_asc); break;
-        case 2: BubbleSort(A, n, compare_normal_desc); break;
-        case 3: BubbleSort(A, n, compare_abs_asc); break;
-        case 4: BubbleSort(A, n, compare_abs_desc); break;
-        default:
-            printf("選項錯誤\n");
-            return 1;
-    }
-
-    printf("排序結果: ");
-    for (int i = 0; i < n; i++) {
-        printf("%d ", A[i]);
-    }
-    printf("\n");
-
-    return 0;
-}
-```
 **程式說明**
 - **多個比較函式**：
 
@@ -1316,51 +1258,11 @@ int main() {
 
 - 讓演算法與比較邏輯解耦，增加可重用性與可維護性
 ---
-### Quick Sort by Callback
-#### 範例程式碼
-```c
-#include<stdio.h>   // printf() 用
-#include<math.h>    // abs() 等數學函式（這裡其實沒用到）
-#include<stdlib.h>  // qsort() 用
+### QuickSort by Callback
+#### 範例程式碼 
 
-// 比較函式，供 qsort 呼叫
-// 參數 a, b 是「陣列元素的位址」，型態是 const void*（泛型指標）
-// qsort 不知道元素型態，所以用 void*，我們必須自行轉型
-int compare(const void* a, const void* b){
-    // 1. 先把泛型指標轉成 int*，表示它實際上指向整數
-    // 2. 再用 * 取出該位址上的整數值
-    int A = *((int*)a);
-    int B = *((int*)b);
+[查看程式碼 ➜](12.functionPointersAndCallbacks/qsortByCallback.c)
 
-    // 回傳 A - B
-    // qsort 規則：
-    // >0 → A 應排在 B 後面
-    // <0 → A 應排在 B 前面
-    // =0 → A 與 B 視為相等
-    return A - B; // 這裡代表升冪排序
-}
-
-int main(){
-    // 原始陣列
-    int A[] = {-31, 22, -1, 50, -6, 4};
-
-    // 呼叫 qsort 進行排序
-    // qsort(
-    //   陣列起始位址,
-    //   陣列元素數量,
-    //   單一元素大小（位元組數）,
-    //   比較函式指標
-    // )
-    qsort(A, 6, sizeof(int), compare);
-
-    // 輸出排序後的陣列
-    for(int i = 0; i < 6; i++)
-        printf("%d ", A[i]);
-    // 輸出結果: -31 -6 -1 4 22 50
-
-    return 0;
-}
-```
 #### 1️⃣ 這段程式的目的是什麼？
 它的功能是 用 **C 標準函式庫的 `qsort()`** 來排序一個整數陣列
 在這裡，陣列是：
@@ -1372,7 +1274,8 @@ int main(){
 -31 -6 -1 4 22 50
 ```
 ---
-#### 2️⃣ qsort 是什麼？
+#### 2️⃣ qsort 是什麼？ 
+
 - **定義**：`qsort`（Quick Sort）是 C 標準函式庫 `<stdlib.h>` 提供的泛型排序函式。
 
 - **好處**：可以排序任何型態的資料（整數、浮點數、字串、結構），不需要自己寫排序演算法。
@@ -1386,6 +1289,12 @@ void qsort(
     int (*compare)(const void *, const void *) // 比較函式
 );
 ```
+
+## 相關參考資源
+- [Microsoft Docs - qsort 函式說明](https://learn.microsoft.com/zh-tw/cpp/c-runtime-library/reference/qsort?view=msvc-170)  
+- [HackMD - C 語言 qsort 筆記](https://hackmd.io/@hank20010209/S1mOTzbys/%2Fe8GFgX6nSIetgJcTZy_jrQ)  
+- [TutorialsPoint - C qsort 函式](https://www.tutorialspoint.com/c_standard_library/c_function_qsort.htm)
+
 ---
 #### 3️⃣ compare 函式
 ```c
