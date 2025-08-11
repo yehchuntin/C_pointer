@@ -1055,6 +1055,8 @@ B(A);  // 直接傳函式名，效果相同
 ---
 
 ### BubbleSort by Callback
+[查看程式碼 ➜](12.functionPointersAndCallbacks/bubblesortByCallback.c)
+
 ## 範例程式碼
 ```c
 #include<stdio.h>
@@ -1186,7 +1188,7 @@ main()
    └─ 回到 BubbleSort 判斷是否交換元素
 ```
 ---
-##### ️⃣ 總結
+##### ️總結
 - 直接 `call compare()` → 簡單，但耦合度高、彈性差。
 
 - **透過參數傳 callback** → 多一個參數，但可重用性高、可動態更換邏輯。
@@ -1196,4 +1198,121 @@ main()
 
 ---
 
+### 延伸應用：多種排序邏輯
+
+[查看程式碼 ➜](12.functionPointersAndCallbacks/absSortByCallback.c)
+
+上面範例中，我們只用一個 `compare` 函式實現單一的比較規則（升冪）。  
+但如果需求增加，例如要支援 **升冪 / 降冪**、**正常值 / 絕對值** 四種不同模式，  
+就可以定義多個比較函式，並在 `main` 中根據使用者選擇傳入對應的函式指標。
+
+這樣可以：
+- 保持 `BubbleSort` 核心程式碼不變
+- 在執行時自由切換排序邏輯
+- 讓排序函式更加通用化，甚至可以擴展到其他型態（如字串、結構）
+
+接下來的範例將示範如何將 **正常/絕對值** 與 **升冪/降冪** 結合，讓使用者一次可選擇四種排列方式。
+
+---#### 範例程式碼：四種排序模式
+```c
+#include <stdio.h>
+#include <math.h>
+
+// 正常值升冪
+int compare_normal_asc(int a, int b) {
+    return a - b;
+}
+
+// 正常值降冪
+int compare_normal_desc(int a, int b) {
+    return b - a;
+}
+
+// 絕對值升冪
+int compare_abs_asc(int a, int b) {
+    return abs(a) - abs(b);
+}
+
+// 絕對值降冪
+int compare_abs_desc(int a, int b) {
+    return abs(b) - abs(a);
+}
+
+void BubbleSort(int *A, int size, int (*compare)(int, int)) {
+    int i, j, temp;
+    for (i = 0; i < size - 1; i++) {
+        for (j = 0; j < size - 1 - i; j++) {
+            if (compare(A[j], A[j + 1]) > 0) {
+                temp = A[j];
+                A[j] = A[j + 1];
+                A[j + 1] = temp;
+            }
+        }
+    }
+}
+
+int main() {
+    int A[] = {-31, 22, -1, 50, -6, 4};
+    int n = sizeof(A) / sizeof(A[0]);
+    int choice;
+
+    printf("選擇排序方式:\n");
+    printf("1: 正常值升冪\n");
+    printf("2: 正常值降冪\n");
+    printf("3: 絕對值升冪\n");
+    printf("4: 絕對值降冪\n");
+    printf("輸入選項 (1-4): ");
+    scanf("%d", &choice);
+
+    switch (choice) {
+        case 1: BubbleSort(A, n, compare_normal_asc); break;
+        case 2: BubbleSort(A, n, compare_normal_desc); break;
+        case 3: BubbleSort(A, n, compare_abs_asc); break;
+        case 4: BubbleSort(A, n, compare_abs_desc); break;
+        default:
+            printf("選項錯誤\n");
+            return 1;
+    }
+
+    printf("排序結果: ");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", A[i]);
+    }
+    printf("\n");
+
+    return 0;
+}
+```
+**程式說明**
+- **多個比較函式**：
+
+  -每個函式都遵循相同簽名 `int (int, int)`，方便傳給 `BubbleSort`。
+
+  - 正常值 / 絕對值 + 升冪 / 降冪 形成四種組合。
+
+- **函式指標選擇**：
+
+  - 使用 `switch` 依使用者輸入，選擇對應的比較函式傳給 `BubbleSort`。
+
+- **排序核心不變**：
+
+  -`BubbleSort` 不需知道是什麼排序規則，透過 callback 動態呼叫比較邏輯。
+---
+**延伸討論：為什麼不用 if 寫死？**
+如果用 `if` 或直接在 `BubbleSort` 裡寫 `A[j] > A[j+1]`，
+
+- 只能支援固定的比較方式
+
+- 要增加排序模式必須改 `BubbleSort` 本身，違反「模組化設計」原則
+
+- 無法在執行時決定排序規則
+
+透過 **Callback Function**：
+
+- 不必改排序函式，新增比較模式只需寫新函式
+
+- 可以在 runtime 選擇排序方式
+
+- 讓演算法與比較邏輯解耦，增加可重用性與可維護性
+---
 ## 13. Memory Leak in C/C++
