@@ -6,6 +6,9 @@
 
 ## 目錄 
 - [1. Introduction to pointers in C/C++](#1-introduction-to-pointers-in-c--c)
+- [2. Work with Pointers](#2-work-with-pointers)
+- [3. Pointer types, pointer arithmetic, void pointers](#3-pointer-types-pointer-arithmetic-void-pointers)
+
 
 
 - [1. Call by Reference](#1-call-by-reference)
@@ -136,6 +139,52 @@ printf("p + 1  = %p\n", p + 1); // 位址向後偏移 1 個 int
 - 如果 `p` 是 `int*`，那麼 `p + 1` 會跳過 **4 bytes**（因為 `sizeof(int) = 4`）。
 
 - 位址的變化與所指向型態的大小有關。
+---
+## 3. Pointer types, pointer arithmetic, void pointers
+<img src="images/pointerTypes.png" width="350">
+
+### 重點解釋 — 型別、解參考、位元組觀察
+[查看程式碼 ➜](3.Pointer%20types,%20pointer%20arithmetic,%20void%20pointers/work_with_bytes.c)
+
+#### A. 指標是「有型別」的位址變數
+```c
+int   a = 1025;
+int  *p = &a;     // p 是 int*，解參考 *p 會讀取「4 bytes」成一個 int
+```
+- `int*`、`char*`… 指標的型別決定了：
+
+  - `*p` 取值時一次讀幾個位元組；
+
+  - `p + 1` 要跨幾個位元組（指標運算步幅）。
+
+#### B. 解參考（dereference）＝用位址取值 / 改值
+```c
+*p;     // 讀值（此例會得到 1025）
+*p = 8; // 寫值（把 a 改成 8）
+```
+#### C. 用 char* 看同一塊記憶體的「每個位元組」
+```c
+char *p0 = (char*)&a;   // 重新詮釋：以 1 byte 為單位觀察 a
+*p0;       // 第 0 個 byte
+*(p0 + 1); // 第 1 個 byte
+```
+> 若平台為 **little-endian**，`a=1025`（二進位 `00000000 00000000 00000100 00000001`）
+會分散在**連續 4 個位址**上：第 0 位元組為 `1`，第 1 位元組為 `4`，其餘為 `0`。
+
+#### D. 指標運算（步幅由型別決定）
+```c
+p + 1;   // 若 p 是 int*，位址前進 sizeof(int) 個 bytes（常見為 4）
+p0 + 1;  // 若 p0 是 char*，位址前進 1 byte
+```
+#### E. 為什麼需要強型別指標？
+[查看程式碼 ➜](3.Pointer%20types,%20pointer%20arithmetic,%20void%20pointers/void_pointer_demo.c)
+
+- 決定**如何解讀記憶體**（一次讀多少、如何詮釋）。
+
+- 決定**指標運算的步幅**。
+
+- 若要「泛型位址」，可用 `void*`；但**無法直接解參考**，需先轉回具體型別。 
+
 ---
 ## 1. Call by Reference
 <img src="images/application-memory.png" width="350">
