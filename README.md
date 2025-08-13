@@ -98,7 +98,45 @@ int main() {
 
 - `*p`取出該位址的內容（即`a`的值）
 ---
+## 2. Work with Pointers
+### 1️⃣ 宣告指標並指向變數
+```c
+int a = 10;
+int *p;     // 宣告指向 int 的指標
+p = &a;     // p 儲存 a 的位址
+```
+- `p` → 存放的是位址（address）
 
+- `*p` → 存放該位址的值（value at address）
+---
+### 2️⃣ 讀取指標與變數資訊
+```c
+printf("p = %p\n", p);     // p 目前指向的位址
+printf("*p = %d\n", *p);   // p 所指向的值
+printf("&p = %p\n", &p);   // p 自己的位址
+```
+💡 `p`指向哪個變數，`*p`就代表該變數的值。
+
+---
+
+### 3️⃣ 讓指標指向不同變數
+```c
+int b = 20;
+p = &b;    // 改為指向 b
+```
+- 改變 `p` 指向的位置不會影響 `p` 自己的位址（`&p` 不變）。
+
+- `*p` 會隨指向的變數不同而改變值。
+---
+### 4️⃣ 指標運算（Pointer Arithmetic）
+```c
+printf("p      = %p\n", p);     // 當前位址
+printf("p + 1  = %p\n", p + 1); // 位址向後偏移 1 個 int
+```
+- 如果 `p` 是 `int*`，那麼 `p + 1` 會跳過 **4 bytes**（因為 `sizeof(int) = 4`）。
+
+- 位址的變化與所指向型態的大小有關。
+---
 ## 1. Call by Reference
 <img src="images/application-memory.png" width="350">
 
