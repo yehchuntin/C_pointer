@@ -57,7 +57,6 @@ p存放a的位址（204）
 
 
 導覽
-
 <div style="display: flex; justify-content: space-between; margin-top: 40px; padding: 20px 0; border-top: 1px solid #eee;">
   <div>
     {% if page.previous %}
