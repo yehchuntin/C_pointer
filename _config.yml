@@ -26,3 +26,18 @@ kramdown:
       line_numbers: true
 
 excerpt_separator: <!--more-->
+
+
+# 在原有內容後面加入：
+
+# 自訂CSS和JS
+head_scripts:
+  - /assets/js/copy-code.js
+
+# 語法高亮設定
+kramdown:
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: 'highlight'
+    block:
+      line_numbers: false
