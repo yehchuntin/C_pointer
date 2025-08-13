@@ -10,7 +10,7 @@ int main(){
     int a=10;
     printf("Address of a in main: %d\n",&a);
     increase(&a);
-    printf("%d\n",a); //a still would be 10.
+    printf("%d\n",a); //a still would be 11.
 
     return 0;
 }
