@@ -1,37 +1,25 @@
-# 完整的 _config.yml 設定檔
-
-```yaml
 title: C 語言指標完全教學
 description: 深入淺出學會 C 語言指標，從基礎到進階的完整教學
 author: yehchuntin
 email: 2017yehchunting@gmail.com
 url: "https://yehchuntin.github.io"
 
-# Jekyll 基本設定
 markdown: kramdown
 highlighter: rouge
 theme: minima
 timezone: Asia/Taipei
 
-# 分頁設定
 paginate: 10
 paginate_path: "/page:num/"
 
-# 外掛
 plugins:
   - jekyll-feed
   - jekyll-paginate
   - jekyll-seo-tag
 
-# 導覽選單
 header_pages:
   - about.md
 
-# 自訂CSS和JS
-head_scripts:
-  - /assets/js/copy-code.js
-
-# 語法高亮設定（合併版本）
 kramdown:
   syntax_highlighter: rouge
   syntax_highlighter_opts:
@@ -39,12 +27,6 @@ kramdown:
     block:
       line_numbers: false
 
-# 文章摘要分隔符
 excerpt_separator: <!--more-->
 
-# 社群連結（可選）
 github_username: yehchuntin
-
-# Google Analytics（之後可以加入）
-# google_analytics: 你的GA追蹤代碼
-```
