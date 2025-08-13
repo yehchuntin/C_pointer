@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "第1章：Introduction to pointers in C/C++"
-date: 2024-01-01 10:00:00 +0800
+date: 2025-08-13 10:00:00 +0800
 categories: [C語言, 指標, 基礎]
 tags: [pointer, introduction, basic]
 excerpt: 指標是 C 語言最重要的概念之一。本文將從最基礎的角度介紹什麼是指標，以及指標與記憶體位址的關係。
@@ -40,7 +40,8 @@ int main() {
 }
 ```
 
-記憶體示意圖
+## 記憶體示意圖
+
 ```
 位址   | 內容
 -----------------
@@ -48,42 +49,19 @@ int main() {
 64     | p = 204
 ```
 
-> p存放a的位址（204）
-> *p取出該位址的內容（即a的值）
+- `p`存放`a`的位址（204）
+- `*p`取出該位址的內容（即`a`的值）
 
-💡 重點提醒
+## 💡 重點提醒
 
-指標儲存的是位址，不是值
-& 運算子用來取得變數的位址
-* 運算子用來取得指標指向的值（解參考）
-指標本身也有自己的位址
+1. **指標儲存的是位址**，不是值
+2. **`&` 運算子**用來取得變數的位址  
+3. **`*` 運算子**用來取得指標指向的值（解參考）
+4. 指標本身也有自己的位址
 
+---
 
-導覽
-<div style="display: flex; justify-content: space-between; margin-top: 40px; padding: 20px 0; border-top: 1px solid #eee;">
-  <div>
-    {% if page.previous %}
-      <a href="{{ page.previous.url | relative_url }}" style="text-decoration: none; color: #0366d6;">
-        ← {{ page.previous.title }}
-      </a>
-    {% else %}
-      <a href="{{ '/' | relative_url }}" style="text-decoration: none; color: #0366d6;">
-        ← 回到首頁
-      </a>
-    {% endif %}
+## 📖 文章導覽
 
-
-
-  </div>
-  <div style="text-align: right;">
-    {% if page.next %}
-      <a href="{{ page.next.url | relative_url }}" style="text-decoration: none; color: #0366d6;">
-        {{ page.next.title }} →
-      </a>
-    {% else %}
-      <span style="color: #999;">
-        第二章即將推出...
-      </span>
-    {% endif %}
-  </div>
-</div>
+**上一篇：** [← 回到首頁]({{ '/' | relative_url }})  
+**下一篇：** 第2章即將推出...
