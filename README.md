@@ -9,52 +9,48 @@
 - [2. Work with Pointers](#2-work-with-pointers)
 - [3. Pointer types, pointer arithmetic, void pointers](#3-pointer-types-pointer-arithmetic-void-pointers)
 - [4. Pointers to Pointers](#4-pointers-to-pointers)
-
-
-
-
-- [1. Call by Reference](#1-call-by-reference)
+- [5. Call by Reference](#1-call-by-reference)
   - [記憶體區塊](#記憶體區塊)
   - [傳址呼叫 (Call by Address)](#傳址呼叫-call-by-address)
   - [傳值呼叫 (Call by Value)](#傳值呼叫-call-by-value)
-- [2. Pointers and Arrays](#2-pointers-and-arrays)
-- [3. Array as function argument](#3-array-as-functions-argument)
-- [4. Character arrays and pointers - part 1](#4-character-arrays-and-pointers-part1)
+- [6. Pointers and Arrays](#2-pointers-and-arrays)
+- [7. Array as function argument](#3-array-as-functions-argument)
+- [8. Character arrays and pointers - part 1](#4-character-arrays-and-pointers-part1)
   - [字串基本概念](#字串基本概念)
   - [字串與指標](#字串與指標)
   - [用字元指標將字串傳入函式](#用字元指標將字串傳入函式)
-- [5. Character arrays and pointers - part 2](#5-character-arrays-and-pointers-part2)
+- [9. Character arrays and pointers - part 2](#9-character-arrays-and-pointers-part2)
   - [記憶體與Stack解析 ](#記憶體與Stack解析) 
   - [唯讀記憶體 (Read-Only Data Segment)](#唯讀記憶體-read-only-data-segment)
-- [6. Pointers and 2-D arrays](#6-Pointers-and-2-D-arrays)
+- [10. Pointers and 2-D arrays](#10-Pointers-and-2-D-arrays)
   - [2D 指標陣列的使用](#2d-指標陣列的使用) 
   - [2維陣列的存取等價式](#二維陣列的存取等價式)
-- [7. Pointers and multidimensional arrays](#7-Pointers-and-multidimensional-arrays)
+- [11. Pointers and multidimensional arrays](#11-Pointers-and-multidimensional-arrays)
   - [陣列傳入函式的型態規則](#陣列傳入函式的型態規則) 
   - [三維陣列的存取等價式](#三維陣列的存取等價式) 
-- [8. Pointers and dynamic memory - stack vs heap](#8-Pointers-and-dynamic-memory-stack-vs-heap) 
+- [12. Pointers and dynamic memory - stack vs heap](#12-Pointers-and-dynamic-memory-stack-vs-heap) 
   - [C 函式執行與記憶體配置](#c-函式執行與記憶體配置)
   - [Stack Overflow 是什麼？](#stack-overflow-是什麼)
   - [Heap 是什麼？該如何使用它？](#heap-是什麼-該如何使用它)
   - [malloc 的記憶體配置動態與圖解](#malloc-的記憶體配置動態與圖解)
-- [9. Dynamic memory allocation in C - malloc calloc realloc free](#9-Dynamic-memory-allocation-in-C-malloc-calloc-realloc-free)
+- [13. Dynamic memory allocation in C - malloc calloc realloc free](#13-Dynamic-memory-allocation-in-C-malloc-calloc-realloc-free)
   - [malloc (Memory Allocation)](#malloc-memory-allocation)
   - [calloc (Contiguous Allocation)](#calloc-contiguous-allocation)
   - [realloc (Reallocate Memory)](#realloc-reallocate-memory)
-- [10. Pointers as Function Returns in C/C++](#10-pointers-as-function-returns-in-cc)
+- [14. Pointers as Function Returns in C/C++](#14-pointers-as-function-returns-in-cc)
   - [使用 malloc 與 free 後的指標行為說明](#使用-malloc-與-free-後的指標行為說明)
   - [使用 realloc 調整記憶體大小的行為說明](#使用-realloc-調整記憶體大小的行為說明)
   - [Heap 與 Stack 回傳指標的差異](#heap-與-stack-回傳指標的差異)
-- [11. Function Pointers in C / C++](#11-function-pointers-in-c--c)
+- [15. Function Pointers in C / C++](#15-function-pointers-in-c--c)
   - [function pointer原理解釋](#function-pointer原理解釋)
   - [function pointer實例操作](#function-pointer實例操作)
-- [12. Function Pointers and Callbacks](#12-function-pointers-and-callbacks)
+- [16. Function Pointers and Callbacks](#16-function-pointers-and-callbacks)
   - [function pointer 基本範例](#function-pointer-基本範例)
   - [BubbleSort by Callback](#BubbleSort-by-Callback)
   - [延伸應用：多種排序邏輯](#延伸應用多種排序邏輯)
   - [QuickSort by Callback](#QuickSort-by-Callback)
 
-- [13. Memory Leak in C/C++](#13-memory-leak-in-cc)
+- [17. Memory Leak in C/C++](#13-memory-leak-in-cc)
 - [最終總結 — C 語言 Pointer 思維地圖](#最終總結--c-語言-pointer-思維地圖)
 
 ---
@@ -250,7 +246,7 @@ r  == &q;     // r 裝的是 q 的位址
 
   - 例：從 `r` 到 `x` 要三步（`r → *r=q → **r=p → ***r=x`）→ 用 `***r`。
 ---
-## 1. Call by Reference
+## 5. Call by Reference
 <img src="images/application-memory.png" width="350">
 
 ### 記憶體區塊
@@ -294,7 +290,7 @@ r  == &q;     // r 裝的是 q 的位址
 
 ---
 
-## 2. Pointers and Arrays
+## 6. Pointers and Arrays
 <img src="images/pointers-and-arrays.png" width="500">
 
 [查看程式碼 ➜](2.pointerAndArray/pointer-and-array.c)
@@ -321,7 +317,7 @@ printf("%d\n", *(A+1));  // *(A+1) → A[1] 的值 (例如 4)
 
 ---
 
-## 3. Array as Functions Argument
+## 7. Array as Functions Argument
 
 ### ❌ 錯誤寫法
 [查看程式碼 ➜](3.arrayAsFunctionArgument/wrong-array-in-functions.c)
@@ -366,7 +362,7 @@ printf("%d\n", *(A+1));  // *(A+1) → A[1] 的值 (例如 4)
 ```
 ---
 
-## 4. Character Arrays and Pointers Part1
+## 8. Character Arrays and Pointers Part1
 ### 字串基本概念
 [查看程式碼 ➜](4.characterArraysAndPointers/basicStringSkill.c)
 
@@ -429,7 +425,7 @@ printf("%d\n", *(A+1));  // *(A+1) → A[1] 的值 (例如 4)
 (5) while(C[i] != '\0')：用 '\0' 判斷字串結尾。
 ```
 
-## 5. Character Arrays and Pointers Part2
+## 9. Character Arrays and Pointers Part2
 ### 記憶體與Stack解析 
 [查看程式碼 ➜](4.characterArraysAndPointers/stringAsFunctionArgument.c)
 
@@ -490,7 +486,7 @@ const char *C = "Hello"; // 指向常量，不能修改內容
 ```
 ---
 
-## 6. Pointers and 2-D Arrays
+## 10. Pointers and 2-D Arrays
 ### 2D 指標陣列的使用
 <img src="images/pointerAnd2dArray(1).png" width="500">
 
@@ -545,7 +541,7 @@ B[i][j] = * (B[i] + j)
 - 最外層 * 解參考，取得值。
 ---
 
-## 7. Pointers and Multidimensional Arrays
+## 11. Pointers and Multidimensional Arrays
 [查看程式碼 ➜](7.pointersAndMultidimensionalArrays/three-dimensional.c)
 
 1️⃣ 主程式與陣列宣告
@@ -628,7 +624,7 @@ C[i][j][k] = *(*(C[i]+j)+k)
 - `*`：取值
 ---
 
-## 8. Pointers and Dynamic Memory-Stack vs Heap
+## 12. Pointers and Dynamic Memory-Stack vs Heap
 ### C 函式執行與記憶體配置
 <img src="images/stack-vs-heap.png" width="500">
 
@@ -787,7 +783,7 @@ p = (int*)malloc(sizeof(int));
 | free(p)    | `p` 保留，但 `200` 被釋放 | 空間變成可再利用       |
 | 第二次 malloc | `p` 指向 `400`      | `400` = `20` |
 ---
-## 9. Dynamic Memory Allocation in C-malloc calloc realloc free
+## 13. Dynamic Memory Allocation in C-malloc calloc realloc free
 ## malloc (Memory Allocation)
 <img src="images/mallocUsage.png" width="500">
 
@@ -882,7 +878,7 @@ p = (int *)realloc(p, 5 * sizeof(int));
 
 ---
 
-## 10. Pointers as Function Returns in C/C++
+## 14. Pointers as Function Returns in C/C++
 ### 使用 malloc 與 free 後的指標行為說明
 [查看程式碼 ➜](10.Pointers%20as%20Function%20Returns%20in%20C/malloc-free.c)
 
@@ -1031,7 +1027,7 @@ return &c;   // ❌ 危險：c 在函式內的 Stack
 - 適合用在需要函式外繼續使用資料的情況。
 ---
 
-## 11. Function Pointers in C / C++
+## 15. Function Pointers in C / C++
 ### function pointer原理解釋
 <img src="images/functionPointer.png" width="500">
 
@@ -1201,7 +1197,7 @@ ptr("Mia");         // 呼叫 PrintHello("Mia")
 
   - **函式表（function table）與動態分派**
 ---
-## 12. Function Pointers and Callbacks
+## 16. Function Pointers and Callbacks
 ### function pointer 基本範例
 [查看程式碼 ➜](12.functionPointersAndCallbacks/callback-example.c)
 
@@ -1552,7 +1548,7 @@ for(int i=0;i<6;i++)
 - 比較函式必須用 `const void*` 當參數，並在裡面轉型
 
 ---
-## 13. Memory Leak in C/C++
+## 17. Memory Leak in C/C++
 ### C：Stack vs Heap（以洗牌小遊戲為例）
 > 本筆記示範同一支程式，將字元陣列放在**Stack（Case 1）** 與 **Heap（Case 2）** 之差異、效能與風險。最後附上記憶體配置圖。
 
