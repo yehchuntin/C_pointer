@@ -8,6 +8,8 @@
 - [1. Introduction to pointers in C/C++](#1-introduction-to-pointers-in-c--c)
 - [2. Work with Pointers](#2-work-with-pointers)
 - [3. Pointer types, pointer arithmetic, void pointers](#3-pointer-types-pointer-arithmetic-void-pointers)
+- [4. Pointers to Pointers](#4-pointers-to-pointers)
+
 
 
 
@@ -185,6 +187,68 @@ p0 + 1;  // 若 p0 是 char*，位址前進 1 byte
 
 - 若要「泛型位址」，可用 `void*`；但**無法直接解參考**，需先轉回具體型別。 
 
+---
+## 4. Pointers to Pointers
+<img src="images/pointersToPointers.png" width="350">
+
+
+[查看程式碼 ➜](4.pointersToPointers/pointer_to_pointer_demo.c)
+
+---
+
+1) 建立一層一層的指標鏈
+```c
+int  x = 5;
+int *p = &x;   // p 指向 x
+*p = 6;        // 透過 p 改 x → x=6
+```
+- `p` 裡面存的是 `&x`（x 的位址），`*p` 代表「沿著 p 指的位址取值」＝ `x`。
+
+```c
+int **q = &p;  // q 指向 p
+int ***r = &q; // r 指向 q
+```
+- `q` 存的是 `&p`，`*q` 還原成 `p`，`**q` 取得 `x`。
+
+- `r` 存的是 `&q`，一路解到值需要 `***r`。
+---
+2) 逐層解參考（與圖上綠字對應）
+```c
+*p;    // → x 的值（6）
+**q;   // → x 的值（6），因為 *q 是 p，**q 是 *p
+***r;  // → x 的值（6），一路解到實值
+```
+- 次數＝星號層數＝從這層走到實際變數要經過的**位址跳數**。
+---
+3) 逐層的「位址」關係（與圖上藍色位址對應）
+```c
+p  == &x;     // p 裝的是 x 的位址
+q  == &p;     // q 裝的是 p 的位址
+r  == &q;     // r 裝的是 q 的位址
+*q == p;      // 解一層回到 p
+**r == p;     // 解兩層也會回到 p
+```
+- 用 `%p` 印位址時會看到這些等式在你的環境下成立（數值不同但相等關係相同）。
+---
+4) 從不同層「改值」 → 都會打到同一個 x
+```c
+***r = 10;  // 透過 r 改 x
+```
+- 圖中紅框「6」的格子，就是 `x` 真正放值的位置；從任何路徑（`*p` / `**q` / `***r`）寫入，都是改到同一格。
+
+```c
+**q = *p + 2; // 先讀 x（*p），再加 2，寫回 x
+```
+- 這段示範「讀值路徑」與「寫回路徑」可以分別來自不同層，但最後落點都在 `x`。
+---
+5) 如何判斷要加幾顆星？
+- 看你的**起點**是哪個指標變數，
+
+- 再看你要到的**終點**是「哪個實體值」。
+
+- 算出從起點到終點要「沿著位址解下去」幾步，就要加幾顆 *。
+
+  - 例：從 `r` 到 `x` 要三步（`r → *r=q → **r=p → ***r=x`）→ 用 `***r`。
 ---
 ## 1. Call by Reference
 <img src="images/application-memory.png" width="350">
